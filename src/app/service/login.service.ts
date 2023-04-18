@@ -45,6 +45,6 @@ export class LoginService {
         localStorage.removeItem('token')
         localStorage.removeItem('authorities')
         this.userSubject.next(null)
-        this.router.navigate(['/login'])
+        this.router.navigate(['/auth/login'])
     }
 }
