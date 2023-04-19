@@ -12,6 +12,15 @@ export class AppMenuComponent implements OnInit {
 
     model: any[] = [];
 
+    comumMenu = [
+        {
+            label: 'Relatorios',
+            items:[
+                {label: 'Financeiro', icon: 'pi pi-fw pi-bookmark', routerLink: ['/relatorio/financeiro']}
+            ]
+        }
+    ]
+
     menuOutros = [
         {
             label: 'Home',
@@ -187,10 +196,10 @@ export class AppMenuComponent implements OnInit {
     constructor(public layoutService: LayoutService, private loginService: LoginService) { }
 
   ngOnInit() {
-      if(this.loginService.userValue?.email === 'douglas.versato@gmail.com'){
-          this.model = this.menuDouglas
+      if(localStorage.getItem('user')?.indexOf('douglas.versato@gmail.com')) {
+          this.model = this.menuDouglas.concat(this.comumMenu)
       } else {
-          this.model = this.menuOutros
+          this.model = this.menuOutros.concat(this.comumMenu)
       }
      }
 }
