@@ -1,18 +1,25 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { LayoutService } from "../service/app.layout.service";
 import { MenuService } from "../app.menu.service";
+import {LoginService} from "../../service/login.service";
 
 @Component({
     selector: 'app-config',
     templateUrl: './app.config.component.html'
 })
-export class AppConfigComponent {
+export class AppConfigComponent implements OnInit{
 
     @Input() minimal: boolean = false;
 
     scales: number[] = [12, 13, 14, 15, 16];
 
-    constructor(public layoutService: LayoutService, public menuService: MenuService) { }
+    constructor(public layoutService: LayoutService, public menuService: MenuService, private loginService: LoginService) { }
+
+    ngOnInit(){
+        if(localStorage.getItem('user')?.indexOf('douglas.versato@gmail.com')) {
+            this.changeTheme('bootstrap4-dark-blue', 'dark');
+        }
+    }
 
     get visible(): boolean {
         return this.layoutService.state.configSidebarVisible;
