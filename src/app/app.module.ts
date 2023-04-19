@@ -12,6 +12,7 @@ import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import {LoginService} from "./service/login.service";
+import {SharedModule} from "./_shared/shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import {LoginService} from "./service/login.service";
     ],
     imports: [
         AppRoutingModule,
-        AppLayoutModule
+        AppLayoutModule,
+        SharedModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
