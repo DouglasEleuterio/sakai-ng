@@ -5,7 +5,11 @@
             <div class="p-formgrid grid">
                 <div class="field lg:col-4 md:col-6 sm:col-12 xs:col-12 col-12">
                     <label htmlFor="name2">Forma de Pagamento</label>
-                    <app-auto-complete [service]="getService()" (dataSelected)="onFormaPagamentoSelecionado($event)"></app-auto-complete>
+                    <app-auto-complete [service]="getFomaPagamentoServiceService()" (dataSelected)="onFormaPagamentoSelecionado($event)"></app-auto-complete>
+                </div>
+                <div class="field lg:col-4 md:col-6 sm:col-12 xs:col-12 col-12">
+                    <label htmlFor="name2">Instituição Bancária</label>
+                    <app-auto-complete [service]="getInstituicaoBancariaServiceService()" (dataSelected)="onInstituicaBancariaSelecionado($event)"></app-auto-complete>
                 </div>
             </div>
         </div>
