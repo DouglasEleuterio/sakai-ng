@@ -1,5 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {FormaPagamentoModel} from "../../../_model/forma-pagamento.model";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 
 @Component({
@@ -20,8 +19,9 @@ export class AutoCompleteComponent {
     }
 
     ngOnInit() {
-        this.service.loadAutoCompleteData().subscribe((value: { content: FormaPagamentoModel[]; }) => {
-            this.data = value.content;
+        this.service.loadAutoCompleteData().subscribe((value: any[]) => {
+            this.data = value;
+            this.filterData({query: ''})
         });
     }
 

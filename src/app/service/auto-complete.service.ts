@@ -13,6 +13,6 @@ export abstract class AutoCompleteService<T> {
   }
 
   loadAutoCompleteData(): Observable<T[]> {
-      return this.http.get(environment.apiUrl + this.resourcePath) as Observable<T[]>
+      return this.http.get(environment.apiUrl + this.resourcePath + '/all') as Observable<T[]>
   }
 }
