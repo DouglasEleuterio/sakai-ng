@@ -1,9 +1,9 @@
 <div class="grid">
     <div class="col-12">
         <div class="card p-fluid">
-            <h5>Vertical Grid</h5>
+            <h5>Filtros</h5>
             <div class="p-formgrid grid">
-                <div class="field col">
+                <div class="field lg:col-4 md:col-6 sm:col-12 xs:col-12 col-12">
                     <label htmlFor="name2">Forma de Pagamento</label>
                     <app-auto-complete [service]="getService()" (dataSelected)="onFormaPagamentoSelecionado($event)"></app-auto-complete>
                 </div>
