@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import {CountryService} from "../../../demo/service/country.service";
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {FormaPagamentoModel} from "../../../_model/forma-pagamento.model";
+
 
 @Component({
   selector: 'app-auto-complete',
@@ -8,30 +9,36 @@ import {CountryService} from "../../../demo/service/country.service";
 })
 export class AutoCompleteComponent {
 
-    selectedCountryAdvanced: any[] = [];
-    filteredCountries: any[] = [];
-    countries: any[] = [];
+    @Input() service: any | undefined
+    @Output() dataSelected = new EventEmitter<any>();
 
-    constructor(private countryService: CountryService) {
+    selectedEntity: any[] = [];
+    filteredEntity: any[] = [];
+    data: any[] = [];
+
+    constructor() {
     }
 
     ngOnInit() {
-        this.countryService.getCountries().then(countries => {
-            this.countries = countries;
+        this.service.loadAutoCompleteData().subscribe((value: { content: FormaPagamentoModel[]; }) => {
+            this.data = value.content;
         });
     }
 
 
-    filterCountry(event: any) {
+    filterData(event: any) {
         const filtered: any[] = [];
         const query = event.query;
-        for (let i = 0; i < this.countries.length; i++) {
-            const country = this.countries[i];
-            if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-                filtered.push(country);
+        for (let i = 0; i < this.data.length; i++) {
+            const data = this.data[i];
+            if (data.nome.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+                filtered.push(data);
             }
         }
+        this.filteredEntity = filtered;
+    }
 
-        this.filteredCountries = filtered;
+    selectItem() {
+        this.dataSelected.emit(this.selectedEntity)
     }
 }
