@@ -13,6 +13,9 @@ import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import {LoginService} from "./service/login.service";
 import {SharedModule} from "./_shared/shared/shared.module";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {JwtInterceptor} from "./interceptors/jwt.interceptor";
+import {ErrorInterceptor} from "./interceptors/error.interceptor";
 
 @NgModule({
     declarations: [
@@ -25,6 +28,8 @@ import {SharedModule} from "./_shared/shared/shared.module";
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService, LoginService
     ],
