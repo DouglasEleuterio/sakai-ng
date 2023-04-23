@@ -1,3 +1,3 @@
-<p-autoComplete [(ngModel)]="selectedEntity" (onSelect)="selectItem()" [suggestions]="filteredEntity"
-                (completeMethod)="filterData($event)" field="nome" [dropdown]="true">
+<p-autoComplete [(ngModel)]="selectedEntity" (onSelect)="selectItem()" [suggestions]="filteredEntity" [required]="isRequired()"
+                (completeMethod)="filterData($event)" (onUnselect)="unselectHandler($event)" field="nome" [dropdown]="true" [multiple]="isMultiple()">
 </p-autoComplete>

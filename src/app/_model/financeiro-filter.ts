@@ -4,7 +4,9 @@ export interface FinanceiroFilter {
     search: {
         ativo: boolean | null
         formaPagamento: { id: string }
-        instituicaoBancaria: { id: string }
+        instituicaoBancaria: [
+            { id: string, nome: string }
+        ]
         dataPagamentoDe: Date
         dataPagamentoAte: Date
         origem: string

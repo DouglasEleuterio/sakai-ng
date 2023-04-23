@@ -10,6 +10,9 @@ export class AutoCompleteComponent {
 
     @Input() service: any | undefined
     @Output() dataSelected = new EventEmitter<any>();
+    @Input() multiple: boolean = false
+    @Input() required: boolean = false
+    @Output() unselected = new EventEmitter<any>();
 
     selectedEntity: any[] = [];
     filteredEntity: any[] = [];
@@ -40,5 +43,17 @@ export class AutoCompleteComponent {
 
     selectItem() {
         this.dataSelected.emit(this.selectedEntity)
+    }
+
+    isMultiple() {
+        return this.multiple;
+    }
+
+    isRequired() {
+        return this.required;
+    }
+
+    unselectHandler(event: any) {
+        this.unselected.emit(event)
     }
 }

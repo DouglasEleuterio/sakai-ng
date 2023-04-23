@@ -4,15 +4,17 @@
             <h5>Filtros</h5>
             <p-toast key="tst"></p-toast>
             <div class="p-formgrid grid">
+                <div class="field lg:col-4 md:col-6 sm:col-12 xs:col-12 col-12">
+                    <label htmlFor="instituicao-bancaria">Instituição Bancária</label>
+                    <app-auto-complete [service]="getInstituicaoBancariaServiceService()" [multiple]="true"
+                                       [required]="true"
+                                       (unselected)="removerInstituicao($event)"
+                                       (dataSelected)="onInstituicaBancariaSelecionado($event)"></app-auto-complete>
+                </div>
                 <!--<div class="field lg:col-4 md:col-6 sm:col-12 xs:col-12 col-12">
                     <label htmlFor="forma-pagamento">Forma de Pagamento</label>
                     <app-auto-complete [service]="getFomaPagamentoServiceService()"
                                        (dataSelected)="onFormaPagamentoSelecionado($event)"></app-auto-complete>
-                </div>
-                <div class="field lg:col-4 md:col-6 sm:col-12 xs:col-12 col-12">
-                    <label htmlFor="instituicao-bancaria">Instituição Bancária</label>
-                    <app-auto-complete [service]="getInstituicaoBancariaServiceService()"
-                                       (dataSelected)="onInstituicaBancariaSelecionado($event)"></app-auto-complete>
                 </div>
                 <div class="field lg:col-4 md:col-6 sm:col-12 xs:col-12 col-12">
                     <label htmlFor="origem">Origem</label>
@@ -27,18 +29,18 @@
                 <div class="field lg:col-4 md:col-6 sm:col-12 xs:col-12 col-12">
                     <label for="dataDe" htmlFor="numero-ctr">Data Inicio</label>
                     <p-calendar id="dataDe" [(ngModel)]="filter.search.dataPagamentoDe" dateFormat="dd/mm/yy"
-                                [showIcon]="true" inputId="icon"></p-calendar>
+                                [showIcon]="true" inputId="icon" [maxDate]="maxDate" (onSelect)="atualizarDataDe($event)"></p-calendar>
                 </div>
                 <div class="field lg:col-4 md:col-6 sm:col-12 xs:col-12 col-12">
                     <label for="dataAte" htmlFor="numero-ctr">Data Fim</label>
                     <p-calendar id="dataAte" [(ngModel)]="filter.search.dataPagamentoAte" dateFormat="dd/mm/yy"
-                                inputId="icon" [showIcon]="true">
+                                inputId="icon" [minDate]="minDate" [showIcon]="true">
                     </p-calendar>
                 </div>
             </div>
             <div class="p-card-footer">
                 <div class="p-formgrid grid" style="float: right; margin-right: 5px;">
-                    <p-button label="Obter" (onClick)="gerarRelatorio()" [loading]="loading" styleClass="p-button-raised p-button-secondary "></p-button>
+                    <p-button label="Obter" [disabled]="validarSubmit()" (onClick)="gerarRelatorio()" [loading]="loading" styleClass="p-button-raised p-button-secondary "></p-button>
                 </div>
             </div>
         </p-card>

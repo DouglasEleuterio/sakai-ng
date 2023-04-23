@@ -12,8 +12,12 @@ import {MessageService} from "primeng/api";
     providers:[MessageService]
 })
 export class RelatorioFinanceiroComponent implements OnInit {
+    // @ts-ignore
     public filter: FinanceiroFilter = this.buildFiltro()
     loading: boolean = false;
+    minDate: Date = new Date()
+    maxDate: Date = new Date();
+
 
     constructor(private fomaPagamentoService: FomaPagamentoService,
                 private instituicaoBancariaService: InstituicaoBancariaService,
@@ -38,9 +42,8 @@ export class RelatorioFinanceiroComponent implements OnInit {
     onFormaPagamentoSelecionado(event: {id: string}) {
         this.filter.search.formaPagamento.id = event.id
     }
-    onInstituicaBancariaSelecionado(event: {id: string}) {
-        this.filter.search.instituicaoBancaria.id = event.id
-
+    onInstituicaBancariaSelecionado(event: [{id: string, nome: string}]) {
+        this.filter.search.instituicaoBancaria = event;
     }
     onOrigemSelecionado(event: {nome: string}) {
         this.filter.search.origem = event.nome
@@ -57,7 +60,7 @@ export class RelatorioFinanceiroComponent implements OnInit {
                 dataPagamentoDe: new Date(),
                 origem: "TODOS",
                 formaPagamento: {id: ""},
-                instituicaoBancaria: {id: ""}
+                instituicaoBancaria: []
             }
         }
     }
@@ -79,5 +82,27 @@ export class RelatorioFinanceiroComponent implements OnInit {
             this.loading = false
             this.messageService.add({ key: 'tst', severity: 'error', summary: 'Error', detail: error, life: 10000 });
         })
+    }
+
+    atualizarDataDe(event: any) {
+        this.minDate = event
+        const de = this.filter.search.dataPagamentoDe.toLocaleDateString()
+        const ate = this.filter.search.dataPagamentoAte.toLocaleDateString()
+        if(this.filter.search.dataPagamentoDe.toLocaleDateString() > this.filter.search.dataPagamentoAte.toLocaleDateString())
+            this.filter.search.dataPagamentoAte = this.filter.search.dataPagamentoDe
+    }
+
+    validarSubmit() {
+        console.log(this.filter.search.instituicaoBancaria)
+        console.log(this.filter.search.dataPagamentoDe)
+        if(this.filter.search.instituicaoBancaria.length < 1 || this.filter.search.dataPagamentoDe == null || this.filter.search.dataPagamentoAte == null){
+            return true
+        }
+        return false;
+    }
+
+    removerInstituicao(event: {id: string, nome: string}) {
+        const a = this.filter.search.instituicaoBancaria.indexOf({id: event.id, nome: event.nome})
+        this.filter.search.instituicaoBancaria.splice(a, 1)
     }
 }
