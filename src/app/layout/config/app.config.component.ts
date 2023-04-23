@@ -17,7 +17,7 @@ export class AppConfigComponent implements OnInit{
 
     ngOnInit(){
         if(localStorage.getItem('user')?.indexOf('douglas.versato@gmail.com')) {
-            this.changeTheme('bootstrap4-dark-blue', 'dark');
+            // this.changeTheme('bootstrap4-dark-blue', 'dark');
         }
     }
 
