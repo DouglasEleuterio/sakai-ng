@@ -16,6 +16,7 @@ export class AppMenuComponent implements OnInit {
         {
             label: 'Relatorios',
             items:[
+                {label: 'Combo', icon: 'pi pi-fw pi-bookmark', routerLink: ['/relatorio/combo']},
                 {label: 'Financeiro', icon: 'pi pi-fw pi-bookmark', routerLink: ['/relatorio/financeiro']}
             ]
         }

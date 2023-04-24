@@ -15,4 +15,8 @@ export class RelatorioService {
       return this.http.post(environment.apiUrl + `v2/relatorio/financeiro?dataDe=${filter?.search.dataPagamentoDe.toISOString().split("T")[0]}&dataAte=${filter?.search.dataPagamentoAte.toISOString().split("T")[0]}`, filter ,{observe: 'response', responseType: 'blob'});
       // return this.http.get(environment.apiUrl + 'v2/relatorio/financeiro');
   }
+
+  public gerarRelatorioCombo() {
+        return this.http.get(environment.apiUrl + 'v2/relatorio/combo', {observe: 'response', responseType: 'blob'})
+  }
 }
