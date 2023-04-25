@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
     {
-        path: 'financeiro', data: {breadcrumb: 'Relatorio'},
+        path: 'financeiro', data: {breadcrumb: 'Financeiro'},
         loadChildren: () => import('./relatorio-financeiro/relatorio-financeiro.module')
             .then(m => m.RelatorioFinanceiroModule)
     },
