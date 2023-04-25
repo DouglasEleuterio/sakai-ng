@@ -16,11 +16,12 @@ export class PaginaComponent implements OnInit{
     pagamentos: any [] = []
     loading: boolean = true;
     @ViewChild('filter') filter!: ElementRef;
+    loaging: boolean = true
 
     constructor(private service: PagamentosService) {
         this.sortField = 'dataPagamento'
         this.sortDirection = 'desc'
-        this.paginatorSize = '5'
+        this.paginatorSize = '10'
     }
     //sort=dataPagamento,desc&page=0&size=10&search=ativo!=null;dataPagamento=ge=2020-04-01
 
@@ -32,6 +33,7 @@ export class PaginaComponent implements OnInit{
         // params = params.append('','')
         this.service.getAll(params).subscribe(value => {
             this.pagamentos = value.content
+            this.loaging = false
         })
     }
 }

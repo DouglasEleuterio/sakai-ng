@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <h5>Pagamentos</h5>
-            <p-table [value]="pagamentos" dataKey="name" responsiveLayout="scroll">
+            <p-table [value]="pagamentos" dataKey="name" responsiveLayout="scroll" [loading]="loaging">
                 <ng-template pTemplate="header">
                     <tr>
                         <th pSortableColumn="status">Ativo
