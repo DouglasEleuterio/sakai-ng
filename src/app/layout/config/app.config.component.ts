@@ -15,9 +15,10 @@ export class AppConfigComponent implements OnInit{
 
     constructor(public layoutService: LayoutService, public menuService: MenuService, private loginService: LoginService) { }
 
+    //TODO tema escuro
     ngOnInit(){
         if(localStorage.getItem('user')?.indexOf('douglas.versato@gmail.com')) {
-            // this.changeTheme('bootstrap4-dark-blue', 'dark');
+            this.changeTheme('bootstrap4-dark-blue', 'dark');
         }
     }
 
