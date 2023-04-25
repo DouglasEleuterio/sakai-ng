@@ -2,7 +2,6 @@ import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
 import {LoginService} from "../service/login.service";
-import {interval} from "rxjs";
 
 @Component({
     selector: 'app-menu',
@@ -18,6 +17,12 @@ export class AppMenuComponent implements OnInit {
             items:[
                 {label: 'Combo', icon: 'pi pi-fw pi-bookmark', routerLink: ['/relatorio/combo']},
                 {label: 'Financeiro', icon: 'pi pi-fw pi-bookmark', routerLink: ['/relatorio/financeiro']}
+            ]
+        },
+        {
+            label: 'Financeiro',
+            items: [
+                {label: 'Pagamentos', icon: 'pi pi-fw pi-bookmark', routerLink: '/pagamentos'}
             ]
         }
     ]
@@ -196,11 +201,8 @@ export class AppMenuComponent implements OnInit {
 
     constructor(public layoutService: LayoutService, private loginService: LoginService) { }
 
-  ngOnInit() {
-      if(localStorage.getItem('user')?.indexOf('douglas.versato@gmail.com')) {
-          this.model = this.menuDouglas.concat(this.comumMenu)
-      } else {
-          this.model = this.menuOutros.concat(this.comumMenu)
-      }
-     }
+    ngOnInit(): void {
+        this.model = this.comumMenu
+        //TODO Escolha do menu
+    }
 }

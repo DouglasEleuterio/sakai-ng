@@ -17,7 +17,8 @@ import {AuthGuard} from "./guards/auth.guard";
                     { path: 'documentation', loadChildren: () => import('./demo/components/documentation/documentation.module').then(m => m.DocumentationModule) },
                     { path: 'blocks', loadChildren: () => import('./demo/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
                     { path: 'pages', loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule) },
-                    { path: 'relatorio', loadChildren: () => import('./demo/components/relatorio/relatorio.module').then(m => m.RelatorioModule) }
+                    { path: 'relatorio', loadChildren: () => import('./demo/components/relatorio/relatorio.module').then(m => m.RelatorioModule) },
+                    { path: 'pagamentos', loadChildren: () => import('./demo/components/pagamentos/pagamentos.module').then(m => m.PagamentosModule) }
                 ]
             },
             { path: 'auth', loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule) },
