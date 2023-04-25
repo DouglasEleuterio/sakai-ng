@@ -1,1 +1,41 @@
-<p>pagina works!</p>
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>Pagamentos</h5>
+            <p-table [value]="pagamentos" dataKey="name" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="status">Ativo
+                            <p-sortIcon field="status"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="dataPagamento">Data Pagamento
+                            <p-sortIcon field="dataPagamento"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="valor">Valor
+                            <p-sortIcon field="valor"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="formaPagamento">Forma Pagamento
+                            <p-sortIcon field="formaPagamento"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="tipoPagamento">Tipo Pagamento
+                            <p-sortIcon field="tipoPagamento"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="iBancaria">Instituição Bancária
+                            <p-sortIcon field="iBancaria"></p-sortIcon>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                    <tr>
+                        <td style="min-width: 12rem;">{{product.ativo}}</td>
+                        <td style="min-width: 12rem;">{{product.dataPagamento}}</td>
+                        <td style="min-width: 12rem;">{{product.valor | currency:'BRL'}}</td>
+                        <td style="min-width: 12rem;">{{product.formaPagamento.nome}}</td>
+                        <td style="min-width: 12rem;">{{product.ctr === null ? 'Combo' : 'CTR'}}</td>
+                        <td style="min-width: 8rem;">{{product.instituicaoBancaria.nome}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
