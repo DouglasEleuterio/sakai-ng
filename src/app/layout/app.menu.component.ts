@@ -201,8 +201,8 @@ export class AppMenuComponent implements OnInit {
 
     constructor(public layoutService: LayoutService, private loginService: LoginService) { }
 
+    //TODO Escolha do menu
     ngOnInit(): void {
         this.model = this.comumMenu
-        //TODO Escolha do menu
     }
 }

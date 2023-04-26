@@ -5,6 +5,13 @@ import {PaginaRoutingModule} from "./pagina-routing.module";
 import {TableModule} from "primeng/table";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
+import {DialogModule} from "primeng/dialog";
+import {FormsModule} from "@angular/forms";
+import {InputTextModule} from "primeng/inputtext";
+import {SharedModule} from "../../../../_shared/shared/shared.module";
+import {CalendarModule} from "primeng/calendar";
+import {MessageService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
 
 
 @NgModule({
@@ -14,8 +21,14 @@ import {RippleModule} from "primeng/ripple";
         PaginaRoutingModule,
         TableModule,
         ButtonModule,
-        RippleModule
-    ]
+        RippleModule,
+        DialogModule,
+        FormsModule,
+        InputTextModule,
+        SharedModule,
+        CalendarModule,
+        ToastModule
+    ], providers:[MessageService]
 })
 export class PaginaModule {
 }

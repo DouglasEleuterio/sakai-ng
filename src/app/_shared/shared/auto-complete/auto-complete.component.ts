@@ -13,6 +13,8 @@ export class AutoCompleteComponent {
     @Input() multiple: boolean = false
     @Input() required: boolean = false
     @Output() unselected = new EventEmitter<any>();
+    @Output() clear = new EventEmitter<any>();
+    @Input() class: string = '';
 
     selectedEntity: any[] = [];
     filteredEntity: any[] = [];
@@ -55,5 +57,9 @@ export class AutoCompleteComponent {
 
     unselectHandler(event: any) {
         this.unselected.emit(event)
+    }
+
+    clearHandler($event: any) {
+        this.clear.emit($event)
     }
 }
