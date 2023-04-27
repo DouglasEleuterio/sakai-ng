@@ -52,7 +52,7 @@ export class PaginaComponent implements OnInit {
         let params = new HttpParams();
         params = params.append('sort', `${this.sortField},${this.sortDirection}`)
         params = params.append('size', this.rows)
-        params = params.append('search', 'ativo!=null')
+        params = params.append('search', 'ativo!=null;formaPagamento.nome!=Combo')
         params = params.append('page',this.numberPage)
         this.service.getAll(params).subscribe(value => {
             this.pagamentos = value.content
@@ -62,6 +62,7 @@ export class PaginaComponent implements OnInit {
             this.pages = value.totalPages
             this.totalElements = value.totalElements
         }, error => {
+            this.messageService.add({ key: 'tst', severity: 'error', summary: 'Error', detail: error, life: 5000 });
             this.loading = false
         })
     }
