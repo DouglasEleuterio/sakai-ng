@@ -17,6 +17,9 @@
                         <th pSortableColumn="dataPagamento">Data Pagamento
                             <p-sortIcon field="dataPagamento"></p-sortIcon>
                         </th>
+                        <th pSortableColumn="transportadora">Transportadora
+                            <p-sortIcon field="transportadora"></p-sortIcon>
+                        </th>
                         <th pSortableColumn="valor">Valor
                             <p-sortIcon field="valor"></p-sortIcon>
                         </th>
@@ -34,15 +37,14 @@
                 <ng-template pTemplate="body" let-pagamento>
                     <tr>
                         <td style="min-width: 5rem;">{{pagamento.ativo}}</td>
+                        <td style="min-width: 10rem;">{{pagamento.ctr !== null ?  pagamento.ctr.transportador.nome : pagamento.combo.transportador.nome}}</td>
                         <td style="min-width: 10rem;">{{pagamento.dataPagamento | date: 'dd/MM/YYYY'}}</td>
                         <td style="min-width: 8rem;">{{pagamento.valor | currency:'BRL'}}</td>
-                        <td *ngIf="pagamento.formaPagamento.nome !== 'PAGAMENTO EM ABERTO'"
-                            style="min-width: 12rem; ">{{pagamento.formaPagamento.nome}}</td>
-                        <td *ngIf="pagamento.formaPagamento.nome === 'PAGAMENTO EM ABERTO'" style="min-width: 12rem;">
+                        <td style="min-width: 12rem;">
                             <p-button styleClass="p-button-link left"
                                       (onClick)="showDialog(pagamento.id)">{{pagamento.formaPagamento.nome}}</p-button>
                         </td>
-                        <td style="min-width: 5rem;">{{pagamento.ctr === null ? 'Combo' : 'CTR'}}</td>
+                        <td style="min-width: 5rem;">{{pagamento.ctr !== null && pagamento.ctr.id !== null ? 'CTR: ' + pagamento.ctr.numero : 'Combo'}}</td>
                         <td style="min-width: 8rem;">{{pagamento.instituicaoBancaria.nome}}</td>
                     </tr>
                 </ng-template>
