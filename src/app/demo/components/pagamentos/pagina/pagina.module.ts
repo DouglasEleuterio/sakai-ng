@@ -12,10 +12,12 @@ import {SharedModule} from "../../../../_shared/shared/shared.module";
 import {CalendarModule} from "primeng/calendar";
 import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
+import {PaginatorModule} from "primeng/paginator";
+import {PaginacaoComponent} from "../paginacao/paginacao.component";
 
 
 @NgModule({
-    declarations: [PaginaComponent],
+    declarations: [PaginaComponent, PaginacaoComponent],
     imports: [
         CommonModule,
         PaginaRoutingModule,
@@ -27,7 +29,8 @@ import {ToastModule} from "primeng/toast";
         InputTextModule,
         SharedModule,
         CalendarModule,
-        ToastModule
+        ToastModule,
+        PaginatorModule
     ], providers:[MessageService]
 })
 export class PaginaModule {
