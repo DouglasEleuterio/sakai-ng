@@ -14,6 +14,7 @@ import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
 import {PaginatorModule} from "primeng/paginator";
 import {PaginacaoComponent} from "../paginacao/paginacao.component";
+import {CardModule} from "primeng/card";
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {PaginacaoComponent} from "../paginacao/paginacao.component";
         SharedModule,
         CalendarModule,
         ToastModule,
-        PaginatorModule
+        PaginatorModule,
+        CardModule
     ], providers:[MessageService]
 })
 export class PaginaModule {

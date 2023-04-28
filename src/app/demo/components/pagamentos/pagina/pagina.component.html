@@ -1,8 +1,29 @@
 <div class="grid">
     <div class="col-12">
-        <div class="card">
-            <h5>Pagamentos</h5>
-            <p-toast></p-toast>
+        <p-toast></p-toast>
+        <p-card header="Pagamentos">
+            <div class="p-formgrid grid">
+                <div class="field lg:col-4 md:col-6 sm:col-12 xs:col-12 col-12">
+                    <label for="instituicao-bancaria">Instituição Bancária</label>
+                    <app-auto-complete id="instituicao-bancaria" [service]="getInstituicaoBancariaServiceService()" [multiple]="true"
+                                       [required]="true"
+                                       (unselected)="removerInstituicao($event)"
+                                       (dataSelected)="onInstituicaBancariaSelecionado($event)"></app-auto-complete>
+                </div>
+                <div class="field lg:col-4 md:col-6 sm:col-12 xs:col-12 col-12">
+                    <label for="dataSearchDe" htmlFor="numero-ctr">Data Inicio</label>
+                    <p-calendar id="dataSearchDe" [(ngModel)]="filter.search.dataPagamentoDe" dateFormat="dd/mm/yy"
+                                [showIcon]="true" inputId="icon" [maxDate]="maxDate"
+                                (onSelect)="atualizarDataDe($event)"></p-calendar>
+                </div>
+                <div class="field lg:col-4 md:col-6 sm:col-12 xs:col-12 col-12">
+                    <label for="dataSearchAte" htmlFor="numero-ctr">Data Fim</label>
+                    <p-calendar id="dataSearchAte" [(ngModel)]="filter.search.dataPagamentoAte" dateFormat="dd/mm/yy"
+                                inputId="icon" [minDate]="minDate!" [showIcon]="true">
+                    </p-calendar>
+                </div>
+
+            </div>
             <p-table
                 styleClass="p-datatable-gridlines"
                 [value]="pagamentos"
@@ -18,7 +39,7 @@
                             <p-sortIcon field="transportadora"></p-sortIcon>
                         </th>
                         <th pSortableColumn="dataPagamento">Data Pagamento
-                        <p-sortIcon field="dataPagamento"></p-sortIcon>
+                            <p-sortIcon field="dataPagamento"></p-sortIcon>
                         </th>
                         <th pSortableColumn="valor">Valor
                             <p-sortIcon field="valor"></p-sortIcon>
@@ -37,7 +58,7 @@
                 <ng-template pTemplate="body" let-pagamento>
                     <tr>
                         <td style="min-width: 5rem;">{{pagamento.ativo}}</td>
-                        <td style="min-width: 10rem;">{{pagamento.ctr !== null ?  pagamento.ctr.transportador.nome : pagamento.combo.transportador.nome}}</td>
+                        <td style="min-width: 10rem;">{{pagamento.ctr !== null ? pagamento.ctr.transportador.nome : pagamento.combo.transportador.nome}}</td>
                         <td style="min-width: 10rem;">{{pagamento.dataPagamento | date: 'dd/MM/YYYY'}}</td>
                         <td style="min-width: 8rem;">{{pagamento.valor | currency:'BRL'}}</td>
                         <td style="min-width: 12rem;">
@@ -49,8 +70,9 @@
                     </tr>
                 </ng-template>
             </p-table>
-            <p-paginator (onPageChange)="pageChange($event)" [rowsPerPageOptions]="rowsPerPage" [totalRecords]="totalElements" [first]="first" [rows]="rows"></p-paginator>
-        </div>
+            <p-paginator (onPageChange)="pageChange($event)" [rowsPerPageOptions]="rowsPerPage"
+                         [totalRecords]="totalElements" [first]="first" [rows]="rows"></p-paginator>
+        </p-card>
     </div>
 </div>
 

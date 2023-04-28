@@ -11,7 +11,7 @@ export class RelatorioService {
     constructor(private http: HttpClient) { }
 
     public gerarRelatorio( filter: FinanceiroFilter | null) {
-      return this.http.post(environment.apiUrl + `v2/relatorio/financeiro?dataDe=${filter?.search.dataPagamentoDe.toISOString().split("T")[0]}&dataAte=${filter?.search.dataPagamentoAte.toISOString().split("T")[0]}`, filter ,{observe: 'response', responseType: 'blob'});
+      return this.http.post(environment.apiUrl + `v2/relatorio/financeiro?dataDe=${filter?.search.dataPagamentoDe?.toISOString().split("T")[0]}&dataAte=${filter?.search.dataPagamentoAte?.toISOString().split("T")[0]}`, filter ,{observe: 'response', responseType: 'blob'});
   }
 
   public gerarRelatorioCombo() {

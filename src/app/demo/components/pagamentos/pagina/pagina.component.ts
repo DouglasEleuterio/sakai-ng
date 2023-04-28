@@ -5,6 +5,8 @@ import {PagamentoModel} from "../../../../_model/pagamento.model";
 import {FomaPagamentoService} from "../../../../service/foma-pagamento.service";
 import {InstituicaoBancariaService} from "../../../../service/instituicao-bancaria.service";
 import {MessageService} from "primeng/api";
+import {FinanceiroFilter} from "../../../../_model/financeiro-filter";
+import {InstituicaoBancariaModel} from "../../../../_model/instituicao-bancaria.model";
 
 @Component({
     selector: 'app-pagina',
@@ -16,7 +18,6 @@ export class PaginaComponent implements OnInit {
     sortField: string
     sortDirection: string
     pagamentos: any [] = []
-    @ViewChild('filter') filter!: ElementRef;
     loading: boolean = false
     informarPagamentoDialog: boolean = false
     pagamento: PagamentoModel = this.buidPagamento()
@@ -32,6 +33,10 @@ export class PaginaComponent implements OnInit {
     private numberPage: number = 0;
     private pages: number = 1;
 
+    //Filter
+    public filter: FinanceiroFilter = this.buildFiltro()
+    private filterSearch: any;
+
     constructor(private service: PagamentosService,
                 private messageService: MessageService,
                 private fomaPagamentoService: FomaPagamentoService,
@@ -40,8 +45,11 @@ export class PaginaComponent implements OnInit {
         this.sortField = 'dataPagamento'
         this.sortDirection = 'desc'
     }
-
     //sort=dataPagamento,desc&page=0&size=10&search=ativo!=null;dataPagamento=ge=2020-04-01
+    //https://aterrosystem-migracao.herokuapp.com/api/pagamento?sort=dataPagamento,desc&page=0&
+    // search=ativo!=null;formaPagamento.id==3bc68747-4f5a-44f9-9adc-7cce486edd13;
+    // instituicaoBancaria.id==3c040f7c-dcbf-425a-b6a9-71a590bc2196;dataPagamento=ge=2023-04-01;
+    // dataPagamento=le=2023-04-30
 
     ngOnInit(): void {
         this.loadDatas()
@@ -52,7 +60,8 @@ export class PaginaComponent implements OnInit {
         let params = new HttpParams();
         params = params.append('sort', `${this.sortField},${this.sortDirection}`)
         params = params.append('size', this.rows)
-        params = params.append('search', 'ativo!=null;formaPagamento.nome!=Combo')
+        // params = params.append('search', 'ativo!=null;formaPagamento.nome!=Combo')
+        params = params.append('search', this.processaFiltroSearch())
         params = params.append('page',this.numberPage)
         this.service.getAll(params).subscribe(value => {
             this.pagamentos = value.content
@@ -137,4 +146,69 @@ export class PaginaComponent implements OnInit {
         this.rows = event.rows
         this.loadDatas()
     }
+
+    private processaFiltroSearch(): string {
+        let search = 'ativo!=null'
+        if(this.filter.search.formaPagamento.id != null && this.filter.search.formaPagamento.id != '')
+            search = search.concat(';formaPagamento.id==' + this.filter.search.formaPagamento.id)
+        if(this.filter.search.instituicaoBancaria.length > 0 && this.filter.search.instituicaoBancaria[0].id !== "")
+            search = search.concat(';instituicaoBancaria.id=in=(' + this.buildIdsFromList(this.filter.search.instituicaoBancaria) + ')')
+        if(this.filter.search.dataPagamentoDe != null)
+            search = search.concat(`;dataPagamento=ge=${this.filter.search.dataPagamentoDe.toISOString().split("T")[0]}`)
+        if(this.filter.search.dataPagamentoAte != null)
+            search = search.concat(`;dataPagamento=le=${this.filter.search.dataPagamentoAte.toISOString().split("T")[0]}`)
+        return search
+    }
+
+    onInstituicaBancariaSelecionado(event: {id: string, nome: string}) {
+        // @ts-ignore
+        this.filter.search.instituicaoBancaria = event
+        this.loadDatas()
+    }
+
+    getInstituicaoBancariaServiceService() {
+        return this.iBancariaService;
+    }
+
+    removerInstituicao(event: {id: string, nome: string}) {
+        const a = this.filter.search.instituicaoBancaria.indexOf({id: event.id, nome: event.nome})
+        this.filter.search.instituicaoBancaria.splice(a, 1)
+        this.loadDatas()
+    }
+
+    private buildFiltro() {
+        let instituicaoBancaria = [{id: '', nome: ''}]
+        return {
+            sort: "",
+            page: 0,
+            search: {
+                ativo: null,
+                ctr: {numero: null},
+                dataPagamentoAte: null,
+                dataPagamentoDe: null,
+                origem: "TODOS",
+                formaPagamento: {id: ""},
+                instituicaoBancaria: instituicaoBancaria
+            }
+        }
+    }
+
+    private buildIdsFromList(instituicaoBancaria: InstituicaoBancariaModel[]) {
+        let ids = ''
+        for (let i = 0; i < instituicaoBancaria.length; i++) {
+            if(i == instituicaoBancaria.length - 1){
+                ids = ids.concat(instituicaoBancaria[i].id)
+            } else {
+                ids = ids.concat(instituicaoBancaria[i].id + ',')
+            }
+        }
+        return ids;
+    }
 }
+
+
+//sort=dataPagamento,desc&page=0&size=10&search=ativo!=null;dataPagamento=ge=2020-04-01
+//https://aterrosystem-migracao.herokuapp.com/api/pagamento?sort=dataPagamento,desc&page=0&
+// search=ativo!=null;formaPagamento.id==3bc68747-4f5a-44f9-9adc-7cce486edd13;
+// instituicaoBancaria.id==3c040f7c-dcbf-425a-b6a9-71a590bc2196;dataPagamento=ge=2023-04-01;
+// dataPagamento=le=2023-04-30

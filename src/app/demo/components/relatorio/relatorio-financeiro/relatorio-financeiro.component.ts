@@ -86,8 +86,9 @@ export class RelatorioFinanceiroComponent implements OnInit {
 
     atualizarDataDe(event: any) {
         this.minDate = event
-        const de = this.filter.search.dataPagamentoDe.toLocaleDateString()
-        const ate = this.filter.search.dataPagamentoAte.toLocaleDateString()
+        const de = this.filter.search.dataPagamentoDe?.toLocaleDateString()
+        const ate = this.filter.search.dataPagamentoAte?.toLocaleDateString()
+        // @ts-ignore
         if(this.filter.search.dataPagamentoDe.toLocaleDateString() > this.filter.search.dataPagamentoAte.toLocaleDateString())
             this.filter.search.dataPagamentoAte = this.filter.search.dataPagamentoDe
     }
