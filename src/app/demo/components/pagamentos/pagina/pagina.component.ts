@@ -158,6 +158,8 @@ export class PaginaComponent implements OnInit {
             search = search.concat(`;dataPagamento=ge=${this.filter.search.dataPagamentoDe.toISOString().split("T")[0]}`)
         if(this.filter.search.dataPagamentoAte != null)
             search = search.concat(`;dataPagamento=le=${this.filter.search.dataPagamentoAte.toISOString().split("T")[0]}`)
+        if(this.filter.search.ctr.numero != null)
+            search = search.concat(`;ctr.numero==${this.filter.search.ctr.numero}`)
         return search
     }
 

@@ -29,6 +29,11 @@
                                     inputId="icon" [minDate]="minDate!" [showIcon]="true" (onSelect)="atualizarDataInicio($event)">
                         </p-calendar>
                     </div>
+                    <div class="field col-6">
+                        <label for="numeroCTR">Número CTR</label>
+                        <p-inputNumber mode="decimal" [useGrouping]="false" id="numeroCTR" [(ngModel)]="filter.search.ctr.numero" >
+                        </p-inputNumber>
+                    </div>
                     <p-button class="col-12" label="Filtrar" icon="pi pi-search" iconPos="right"
                               (onClick)="loadDatas()"></p-button>
                 </div>
