@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PagamentosService} from "../../../../service/pagamentos.service";
 import {HttpParams} from "@angular/common/http";
 import {PagamentoModel} from "../../../../_model/pagamento.model";
@@ -23,7 +23,7 @@ export class PaginaComponent implements OnInit {
     pagamento: PagamentoModel = this.buidPagamento()
     submitted: boolean = false;
     maxDate: Date;
-    minDate: Date | undefined;
+    minDate: Date;
 
     //Paginator
     first: number = 0;
@@ -35,27 +35,22 @@ export class PaginaComponent implements OnInit {
 
     //Filter
     public filter: FinanceiroFilter = this.buildFiltro()
-    private filterSearch: any;
 
     constructor(private service: PagamentosService,
                 private messageService: MessageService,
                 private fomaPagamentoService: FomaPagamentoService,
                 private iBancariaService: InstituicaoBancariaService) {
         this.maxDate = new Date()
+        this.minDate = new Date()
         this.sortField = 'dataPagamento'
         this.sortDirection = 'desc'
     }
-    //sort=dataPagamento,desc&page=0&size=10&search=ativo!=null;dataPagamento=ge=2020-04-01
-    //https://aterrosystem-migracao.herokuapp.com/api/pagamento?sort=dataPagamento,desc&page=0&
-    // search=ativo!=null;formaPagamento.id==3bc68747-4f5a-44f9-9adc-7cce486edd13;
-    // instituicaoBancaria.id==3c040f7c-dcbf-425a-b6a9-71a590bc2196;dataPagamento=ge=2023-04-01;
-    // dataPagamento=le=2023-04-30
 
     ngOnInit(): void {
         this.loadDatas()
     }
 
-    private loadDatas(){
+    public loadDatas(){
         this.loading = true
         let params = new HttpParams();
         params = params.append('sort', `${this.sortField},${this.sortDirection}`)
@@ -95,6 +90,7 @@ export class PaginaComponent implements OnInit {
     }
 
     atualizarDataDe($event: any) {
+        this.minDate = $event
         this.pagamento.dataPagamento = $event
     }
 
@@ -163,7 +159,6 @@ export class PaginaComponent implements OnInit {
     onInstituicaBancariaSelecionado(event: {id: string, nome: string}) {
         // @ts-ignore
         this.filter.search.instituicaoBancaria = event
-        this.loadDatas()
     }
 
     getInstituicaoBancariaServiceService() {
@@ -173,7 +168,6 @@ export class PaginaComponent implements OnInit {
     removerInstituicao(event: {id: string, nome: string}) {
         const a = this.filter.search.instituicaoBancaria.indexOf({id: event.id, nome: event.nome})
         this.filter.search.instituicaoBancaria.splice(a, 1)
-        this.loadDatas()
     }
 
     private buildFiltro() {
@@ -204,11 +198,8 @@ export class PaginaComponent implements OnInit {
         }
         return ids;
     }
+
+    atualizarDataInicio($event : any) {
+        this.maxDate = $event
+    }
 }
-
-
-//sort=dataPagamento,desc&page=0&size=10&search=ativo!=null;dataPagamento=ge=2020-04-01
-//https://aterrosystem-migracao.herokuapp.com/api/pagamento?sort=dataPagamento,desc&page=0&
-// search=ativo!=null;formaPagamento.id==3bc68747-4f5a-44f9-9adc-7cce486edd13;
-// instituicaoBancaria.id==3c040f7c-dcbf-425a-b6a9-71a590bc2196;dataPagamento=ge=2023-04-01;
-// dataPagamento=le=2023-04-30

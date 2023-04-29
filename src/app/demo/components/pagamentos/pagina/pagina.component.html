@@ -2,27 +2,31 @@
     <div class="col-12">
         <p-toast></p-toast>
         <p-card header="Pagamentos">
-            <div class="p-formgrid grid">
-                <div class="field lg:col-4 md:col-6 sm:col-12 xs:col-12 col-12">
-                    <label for="instituicao-bancaria">Instituição Bancária</label>
-                    <app-auto-complete id="instituicao-bancaria" [service]="getInstituicaoBancariaServiceService()" [multiple]="true"
-                                       [required]="true"
-                                       (unselected)="removerInstituicao($event)"
-                                       (dataSelected)="onInstituicaBancariaSelecionado($event)"></app-auto-complete>
+            <div class="card p-fluid">
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field lg:col-12 md:col-12 sm:col-12 xs:col-12 col-12">
+                        <label for="instituicao-bancaria">Instituição Bancária</label>
+                        <app-auto-complete id="instituicao-bancaria" [service]="getInstituicaoBancariaServiceService()"
+                                           [multiple]="true"
+                                           (unselected)="removerInstituicao($event)"
+                                           (dataSelected)="onInstituicaBancariaSelecionado($event)"></app-auto-complete>
+                    </div>
+                    <div class="field col-6">
+                        <label for="dataSearchDe" htmlFor="numero-ctr">Data Inicio</label>
+                        <p-calendar id="dataSearchDe" [(ngModel)]="filter.search.dataPagamentoDe" dateFormat="dd/mm/yy"
+                                    [showIcon]="true" inputId="icon" [maxDate]="maxDate"
+                                    (onSelect)="atualizarDataDe($event)"></p-calendar>
+                    </div>
+                    <div class="field col-6">
+                        <label for="dataSearchAte" htmlFor="numero-ctr">Data Fim</label>
+                        <p-calendar id="dataSearchAte" [(ngModel)]="filter.search.dataPagamentoAte"
+                                    dateFormat="dd/mm/yy"
+                                    inputId="icon" [minDate]="minDate!" [showIcon]="true" (onSelect)="atualizarDataInicio($event)">
+                        </p-calendar>
+                    </div>
+                    <p-button class="col-12" label="Filtrar" icon="pi pi-search" iconPos="right"
+                              (onClick)="loadDatas()"></p-button>
                 </div>
-                <div class="field lg:col-4 md:col-6 sm:col-12 xs:col-12 col-12">
-                    <label for="dataSearchDe" htmlFor="numero-ctr">Data Inicio</label>
-                    <p-calendar id="dataSearchDe" [(ngModel)]="filter.search.dataPagamentoDe" dateFormat="dd/mm/yy"
-                                [showIcon]="true" inputId="icon" [maxDate]="maxDate"
-                                (onSelect)="atualizarDataDe($event)"></p-calendar>
-                </div>
-                <div class="field lg:col-4 md:col-6 sm:col-12 xs:col-12 col-12">
-                    <label for="dataSearchAte" htmlFor="numero-ctr">Data Fim</label>
-                    <p-calendar id="dataSearchAte" [(ngModel)]="filter.search.dataPagamentoAte" dateFormat="dd/mm/yy"
-                                inputId="icon" [minDate]="minDate!" [showIcon]="true">
-                    </p-calendar>
-                </div>
-
             </div>
             <p-table
                 styleClass="p-datatable-gridlines"
@@ -73,6 +77,7 @@
             <p-paginator (onPageChange)="pageChange($event)" [rowsPerPageOptions]="rowsPerPage"
                          [totalRecords]="totalElements" [first]="first" [rows]="rows"></p-paginator>
         </p-card>
+
     </div>
 </div>
 
