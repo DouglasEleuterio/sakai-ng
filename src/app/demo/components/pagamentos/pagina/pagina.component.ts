@@ -71,7 +71,7 @@ export class PaginaComponent implements OnInit {
         })
     }
 
-    getFomaPagamentoService() {
+    getFormaPagamentoService() {
         return this.fomaPagamentoService;
     }
 
@@ -82,6 +82,11 @@ export class PaginaComponent implements OnInit {
     onFormaPagamentoSelecionado(event: { id: string }) {
         // @ts-ignore
         this.pagamento.formaPagamento.id = event.id
+    }
+
+    onFormaPagamentoSelecionadoFilter(event: { id: string }) {
+        // @ts-ignore
+        this.filter.search.formaPagamento.id = event.id
     }
 
     onIBancariaSelecionado(event: { id: string }) {

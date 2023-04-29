@@ -4,12 +4,17 @@
         <p-card header="Pagamentos">
             <div class="card p-fluid">
                 <div class="p-fluid p-formgrid grid">
-                    <div class="field lg:col-12 md:col-12 sm:col-12 xs:col-12 col-12">
+                    <div class="field col-12">
                         <label for="instituicao-bancaria">Instituição Bancária</label>
                         <app-auto-complete id="instituicao-bancaria" [service]="getInstituicaoBancariaServiceService()"
                                            [multiple]="true"
                                            (unselected)="removerInstituicao($event)"
                                            (dataSelected)="onInstituicaBancariaSelecionado($event)"></app-auto-complete>
+                    </div>
+                    <div class="field col-12">
+                        <label htmlFor="forma-pagamento">Forma de Pagamento</label>
+                        <app-auto-complete [service]="getFormaPagamentoService()"
+                                           (dataSelected)="onFormaPagamentoSelecionadoFilter($event)"></app-auto-complete>
                     </div>
                     <div class="field col-6">
                         <label for="dataSearchDe" htmlFor="numero-ctr">Data Inicio</label>
@@ -86,7 +91,7 @@
     <ng-template pTemplate="content">
         <div class="field">
             <label htmlFor="forma-pagamento">Forma de Pagamento</label>
-            <app-auto-complete id="forma-pagamento" [service]="getFomaPagamentoService()"
+            <app-auto-complete id="forma-pagamento" [service]="getFormaPagamentoService()"
                                (clear)="pagamento.formaPagamento = {id: '', nome: ''}"
                                (dataSelected)="onFormaPagamentoSelecionado($event)"></app-auto-complete>
             <small class="ng-dirty ng-invalid" *ngIf="submitted && !pagamento.formaPagamento?.id">Forma de Pagamento
