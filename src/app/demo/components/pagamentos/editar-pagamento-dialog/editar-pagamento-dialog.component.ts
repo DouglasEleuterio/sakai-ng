@@ -4,6 +4,7 @@ import {FormaPagamentoService} from "../../../../service/forma-pagamento.service
 import {InstituicaoBancariaService} from "../../../../service/instituicao-bancaria.service";
 import {PagamentosService} from "../../../../service/pagamentos.service";
 import {MessageService} from "primeng/api";
+import {FormaPagamentoModel} from "../../../../_model/forma-pagamento.model";
 
 @Component({
     selector: 'app-editar-pagamento-dialog',
@@ -12,33 +13,25 @@ import {MessageService} from "primeng/api";
 })
 export class EditarPagamentoDialogComponent {
 
-    @Input() pagamento!: PagamentoModel;
     @Input() isVisivel: boolean = false;
     @Output() pagamentoAtualizadoHandler = new EventEmitter<boolean>()
+    pagamentoEmEdicao: PagamentoModel = this.pagamentoService.getFormaPagamentoParaEditar()
 
     public submetido: boolean = false;
+    // @ts-ignore
+    formaPagamentoList: FormaPagamentoModel[]
 
-    constructor(private fomaPagamentoService: FormaPagamentoService,
+    constructor(public fomaPagamentoService: FormaPagamentoService,
                 private iBancariaService: InstituicaoBancariaService,
                 private pagamentoService: PagamentosService,
                 private messageService: MessageService) {
-        console.log('Dialog inicializado')
-    }
-
-    ngOnInit() {
-        this.logIt('OnInit');
-    }
-
-    ngAfterViewInit() {
-        this.logIt('After view Init em Autocomplete')
-    }
-
-    logIt(msg: string) {
-        console.log(msg)
+        this.fomaPagamentoService.findList().subscribe( ( value ) => {
+            this.formaPagamentoList = value
+        })
     }
 
     onDialogSave() {
-        this.pagamentoService.atualizarPagamento(this.pagamento).subscribe(value => {
+        this.pagamentoService.atualizarPagamento(this.pagamentoEmEdicao).subscribe(value => {
             this.exibirMensagem('success', 'Atualizado', `Pagamento (${value.id}) atualizado`, 5000)
             //TODO emitir evento ao componente PAI.
             this.limparObjPagamento()
@@ -84,18 +77,22 @@ export class EditarPagamentoDialogComponent {
     }
 
     isPodeSalvar(): boolean {
-        return this.pagamento.dataPagamento != null &&
-            this.pagamento.formaPagamento?.id != '' &&
-            this.pagamento.instituicaoBancaria?.id != '' &&
-            this.pagamento.valor != null &&
-            this.pagamento.id != null
+        return this.pagamentoEmEdicao.dataPagamento != null &&
+            this.pagamentoEmEdicao.formaPagamento?.id != '' &&
+            this.pagamentoEmEdicao.instituicaoBancaria?.id != '' &&
+            this.pagamentoEmEdicao.valor != null &&
+            this.pagamentoEmEdicao.id != null
     }
 
     private limparObjPagamento(): void {
-        this.pagamento = {}
+        this.pagamentoEmEdicao = {}
     }
 
     private setVisibilidadeDialog(isVisible: boolean): void {
         this.isVisivel = isVisible
+    }
+
+    definirFormaPagamento($event: any) {
+        this.pagamentoEmEdicao.formaPagamento = $event
     }
 }
