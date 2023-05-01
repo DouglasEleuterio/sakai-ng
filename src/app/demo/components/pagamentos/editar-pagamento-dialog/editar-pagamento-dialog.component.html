@@ -1,0 +1,28 @@
+<p-dialog [(visible)]="isVisivel" [style]="{width: '550px', height: '700px'}" header="Informar Pagamento"
+          [modal]="true" class="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label htmlFor="forma-pagamento">Forma de Pagamento</label>
+        </div>
+        <div class="field">
+            <label htmlFor="iBancaria">Instituição Bancária</label>
+        </div>
+        <div class="field">
+            <label for="datapagamento">Data Pagamento</label>
+            <p-calendar id="datapagamento" [(ngModel)]="pagamento.dataPagamento" dateFormat="dd/mm/yy" [showIcon]="true"
+                        inputId="icon">
+            </p-calendar>
+        </div>
+        <div class="field">
+            <label for="valor">Valor</label>
+            <p-inputNumber mode="currency" currency="BRL" locale="pt-BR" [useGrouping]="true" id="valor"
+                           [(ngModel)]="pagamento.valor"></p-inputNumber>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                (click)="onDialogCancel()"></button>
+        <button [disabled]="!isPodeSalvar()" pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+                (click)="onDialogSave()"></button>
+    </ng-template>
+</p-dialog>
