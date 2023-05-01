@@ -12,8 +12,7 @@
             <app-lista
             [pagamentos]="pagamentos"
             [loading]="loading"
-            (dialogEditarPagamentoHandler)="pagamentoParaEdicao = $event; informarPagamentoDialog = true"
-            >
+            (dialogEditarPagamentoHandler)="informarPagamentoDialog = true">
             </app-lista>
             <p-paginator (onPageChange)="pageChange($event)" [rowsPerPageOptions]="rowsPerPage"
                          [totalRecords]="totalElements" [first]="first" [rows]="rows"></p-paginator>
@@ -21,7 +20,6 @@
     </div>
 </div>
 
-<app-editar-pagamento-dialog [pagamento]="pagamentoParaEdicao"
-                             [isVisivel]="informarPagamentoDialog"
-                             (pagamentoAtualizadoHandler)="loadDatas()" >
+<app-editar-pagamento-dialog [isVisivel]="informarPagamentoDialog"
+                             (pagamentoAtualizadoHandler)="loadDatas()">
 </app-editar-pagamento-dialog>
