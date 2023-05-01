@@ -1,1 +1,50 @@
-<p>filtro works!</p>
+<div class="card p-fluid">
+    <div class="p-fluid p-formgrid grid">
+        <div class="field col-12">
+            <label for="instituicao-bancaria">Instituição Bancária</label>
+            <app-auto-complete id="instituicao-bancaria"
+                               [service]="instituicaoBancariaService"
+                               [multiple]="true"
+                               (unselected)="removerInstituicao($event)"
+                               (dataSelected)="onInstituicaBancariaSelecionado($event)"></app-auto-complete>
+        </div>
+        <div class="field col-12">
+            <label htmlFor="forma-pagamento">Forma de Pagamento</label>
+            <app-auto-complete [service]="formaPagamentoService"
+                               (dataSelected)="onFormaPagamentoSelecionado($event)"></app-auto-complete>
+        </div>
+        <div class="field col-6">
+            <label for="dataSearchDe" htmlFor="numero-ctr">Data Inicio</label>
+            <p-calendar id="dataSearchDe" [(ngModel)]="filter.search.dataPagamentoDe" dateFormat="dd/mm/yy"
+                        [showIcon]="true" inputId="icon" [maxDate]="maxDate"
+                        (onSelect)="atualizarDataDe($event)"></p-calendar>
+        </div>
+        <div class="field col-6">
+            <label for="dataSearchAte" htmlFor="numero-ctr">Data Fim</label>
+            <p-calendar id="dataSearchAte" [(ngModel)]="filter.search.dataPagamentoAte"
+                        dateFormat="dd/mm/yy"
+                        inputId="icon" [minDate]="minDate" [showIcon]="true"
+                        (onSelect)="atualizarDataAte($event)">
+            </p-calendar>
+        </div>
+        <div class="field col-6">
+            <label for="transportadora">Transportadora</label>
+            <app-auto-complete [disabled]="filter.search.origem === 'Todos' " id="transportadora"
+                               [service]="transportadoraService"
+                               (dataSelected)="onTransportadorSelecionado($event)"></app-auto-complete>
+        </div>
+        <div class="field col-6">
+            <label for="numeroCTR">Número CTR</label>
+            <p-inputNumber mode="decimal" [useGrouping]="false" id="numeroCTR"
+                           [(ngModel)]="filter.search.ctr.numero">
+            </p-inputNumber>
+        </div>
+        <div class="field col-6">
+            <label for="origem">Origem</label>
+            <p-dropdown id="origem" [options]="['Todos','CTR', 'Combo']" [(ngModel)]="filter.search.origem">
+            </p-dropdown>
+        </div>
+        <p-button class="col-12" label="Filtrar" icon="pi pi-search" iconPos="right"
+                  (onClick)="onFilterClick()"></p-button>
+    </div>
+</div>

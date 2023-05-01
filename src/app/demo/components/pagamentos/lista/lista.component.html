@@ -1,1 +1,46 @@
-<p>lista works!</p>
+<p-table
+    styleClass="p-datatable-gridlines"
+    [value]="pagamentos"
+    dataKey="name"
+    responsiveLayout="scroll"
+    [loading]="loading">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="status">Ativo
+                <p-sortIcon field="status"></p-sortIcon>
+            </th>
+            <th pSortableColumn="transportadora">Transportadora
+                <p-sortIcon field="transportadora"></p-sortIcon>
+            </th>
+            <th pSortableColumn="dataPagamento">Data Pagamento
+                <p-sortIcon field="dataPagamento"></p-sortIcon>
+            </th>
+            <th pSortableColumn="valor">Valor
+                <p-sortIcon field="valor"></p-sortIcon>
+            </th>
+            <th pSortableColumn="formaPagamento">Forma Pagamento
+                <p-sortIcon field="formaPagamento"></p-sortIcon>
+            </th>
+            <th pSortableColumn="tipoPagamento">Tipo Pagamento
+                <p-sortIcon field="tipoPagamento"></p-sortIcon>
+            </th>
+            <th pSortableColumn="iBancaria">Instituição Bancária
+                <p-sortIcon field="iBancaria"></p-sortIcon>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-pagamento>
+        <tr>
+            <td style="min-width: 5rem;">{{pagamento.ativo}}</td>
+            <td style="min-width: 10rem;">{{pagamento.ctr !== null ? pagamento.ctr.transportador.nome : pagamento.combo.transportador.nome}}</td>
+            <td style="min-width: 10rem;">{{pagamento.dataPagamento | date: 'dd/MM/YYYY'}}</td>
+            <td style="min-width: 8rem;">{{pagamento.valor | currency:'BRL'}}</td>
+            <td style="min-width: 12rem;">
+                <p-button styleClass="p-button-link left"
+                          (onClick)="onDialogEditarPagamentoClick(pagamento)">{{pagamento.formaPagamento.nome}}</p-button>
+            </td>
+            <td style="min-width: 5rem;">{{pagamento.ctr !== null && pagamento.ctr.id !== null ? 'CTR: ' + pagamento.ctr.numero : 'Combo'}}</td>
+            <td style="min-width: 8rem;">{{pagamento.instituicaoBancaria.nome}}</td>
+        </tr>
+    </ng-template>
+</p-table>

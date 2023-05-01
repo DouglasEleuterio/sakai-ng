@@ -8,7 +8,7 @@ const FORMA_PAGAMENTO_RESOURCE: string = 'forma-pagamento'
 @Injectable({
   providedIn: 'root'
 })
-export class FomaPagamentoService extends AutoCompleteService<FormaPagamentoModel> {
+export class FormaPagamentoService extends AutoCompleteService<FormaPagamentoModel> {
 
     constructor(http: HttpClient) {
         super(http, FORMA_PAGAMENTO_RESOURCE);

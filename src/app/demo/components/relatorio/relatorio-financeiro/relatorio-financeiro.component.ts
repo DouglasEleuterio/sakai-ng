@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FomaPagamentoService} from "../../../../service/foma-pagamento.service";
+import {FormaPagamentoService} from "../../../../service/forma-pagamento.service";
 import {InstituicaoBancariaService} from "../../../../service/instituicao-bancaria.service";
 import {OrigemService} from "../../../../service/origem.service";
 import {FinanceiroFilter} from "../../../../_model/financeiro-filter";
@@ -19,7 +19,7 @@ export class RelatorioFinanceiroComponent implements OnInit {
     maxDate: Date = new Date();
 
 
-    constructor(private fomaPagamentoService: FomaPagamentoService,
+    constructor(private fomaPagamentoService: FormaPagamentoService,
                 private instituicaoBancariaService: InstituicaoBancariaService,
                 private origemService: OrigemService,
                 private relatorioService: RelatorioService,

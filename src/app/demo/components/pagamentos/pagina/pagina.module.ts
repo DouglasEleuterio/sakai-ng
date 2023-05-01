@@ -15,10 +15,13 @@ import {ToastModule} from "primeng/toast";
 import {PaginatorModule} from "primeng/paginator";
 import {PaginacaoComponent} from "../paginacao/paginacao.component";
 import {CardModule} from "primeng/card";
+import {FiltroComponent} from "../filtro/filtro.component";
+import {PagamentosModule} from "../pagamentos.module";
+import {ListaComponent} from "../lista/lista.component";
 
 
 @NgModule({
-    declarations: [PaginaComponent, PaginacaoComponent],
+    declarations: [PaginaComponent, PaginacaoComponent, FiltroComponent, ListaComponent],
     imports: [
         CommonModule,
         PaginaRoutingModule,
@@ -32,7 +35,8 @@ import {CardModule} from "primeng/card";
         CalendarModule,
         ToastModule,
         PaginatorModule,
-        CardModule
+        CardModule,
+        PagamentosModule
     ], providers:[MessageService]
 })
 export class PaginaModule {

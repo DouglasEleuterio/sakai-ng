@@ -5,11 +5,12 @@ export interface FinanceiroFilter {
     page: number
     search: {
         ativo: boolean | null
-        formaPagamento: { id: string }
+        formaPagamento: { id: string | null}
         instituicaoBancaria: InstituicaoBancariaModel[],
         dataPagamentoDe: Date | null
         dataPagamentoAte: Date | null
         origem: string
         ctr: { numero: number | null }
+        transportadora: { id: string | null }
     }
 }
