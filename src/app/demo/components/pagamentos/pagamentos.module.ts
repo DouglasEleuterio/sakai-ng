@@ -7,6 +7,7 @@ import {CalendarModule} from "primeng/calendar";
 import {FormsModule} from "@angular/forms";
 import {SharedModule} from "../../../_shared/shared/shared.module";
 import {DialogModule} from "primeng/dialog";
+import {DropdownModule} from "primeng/dropdown";
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import {DialogModule} from "primeng/dialog";
         CalendarModule,
         FormsModule,
         SharedModule,
-        DialogModule
+        DialogModule,
+        DropdownModule
     ],
     exports: [
         EditarPagamentoDialogComponent
