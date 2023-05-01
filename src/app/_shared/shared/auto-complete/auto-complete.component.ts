@@ -12,6 +12,7 @@ export class AutoCompleteComponent {
     @Output() dataSelected = new EventEmitter<any>();
     @Input() multiple: boolean = false
     @Input() required: boolean = false
+    @Input() disabled: boolean = false
     @Output() unselected = new EventEmitter<any>();
     @Output() clear = new EventEmitter<any>();
     @Input() class: string = '';
@@ -53,6 +54,10 @@ export class AutoCompleteComponent {
 
     isRequired() {
         return this.required;
+    }
+
+    isDisabled() {
+        return this.disabled;
     }
 
     unselectHandler(event: any) {

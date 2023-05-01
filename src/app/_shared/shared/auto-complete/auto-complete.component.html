@@ -3,6 +3,6 @@
                 (completeMethod)="filterData($event)" (onUnselect)="unselectHandler($event)" field="nome"
                 [dropdown]="true" [multiple]="isMultiple()"
                 (onClear)="clearHandler($event)"
-
+                [disabled]="isDisabled()"
 >
 </p-autoComplete>
