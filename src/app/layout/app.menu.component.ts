@@ -24,6 +24,12 @@ export class AppMenuComponent implements OnInit {
             items: [
                 {label: 'Pagamentos', icon: 'pi pi-fw pi-bookmark', routerLink: '/pagamentos'}
             ]
+        },
+        {
+            label: 'CTR',
+            items: [
+                {label: 'Visualizar - Temporário', icon: 'pi pi-fw pi-bookmark', routerLink: '/CTR'}
+            ]
         }
     ]
 
