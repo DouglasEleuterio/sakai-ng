@@ -20,6 +20,7 @@ export class EditarPagamentoDialogComponent {
     public submetido: boolean = false;
     // @ts-ignore
     formaPagamentoList: FormaPagamentoModel[]
+    pagamento: any;
 
     constructor(public fomaPagamentoService: FormaPagamentoService,
                 private iBancariaService: InstituicaoBancariaService,
