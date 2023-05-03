@@ -28,7 +28,8 @@ export class AppMenuComponent implements OnInit {
         {
             label: 'CTR',
             items: [
-                {label: 'Visualizar - Temporário', icon: 'pi pi-fw pi-bookmark', routerLink: '/CTR'}
+                {label: 'Visualizar - Temporário', icon: 'pi pi-fw pi-bookmark', routerLink: '/CTR'},
+                {label: 'Lançar', icon: 'pi pi-fw pi-bookmark', routerLink: '/CTR/lancar'}
             ]
         }
     ]
