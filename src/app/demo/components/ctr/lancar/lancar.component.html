@@ -1,0 +1,61 @@
+<div class="card">
+    <p-divider align="left">
+        <div class="inline-flex align-items-center">
+            <i class="pi pi-user mr-2"></i>
+            <b>Número e Data</b>
+        </div>
+    </p-divider>
+    <div class="flex-auto">
+        <div class="p-fluid p-formgrid grid">
+            <div class="field col-5">
+                <label for="ctr-numero">Número da CTR</label>
+                <p-inputNumber id="ctr-numero" [(ngModel)]="ctr.numero" mode="decimal" inputId="withoutgrouping"
+                               [useGrouping]="false"></p-inputNumber>
+            </div>
+            <div class="field col-5">
+                <label for="dataSearchDe" htmlFor="numero-ctr">Data Inicio</label>
+                <p-calendar id="dataSearchDe" [(ngModel)]="ctr.data" dateFormat="dd/mm/yy"
+                            [showIcon]="true" inputId="icon" [maxDate]="getDataAgora()">
+                </p-calendar>
+            </div>
+        </div>
+    </div>
+    <p>Data</p>
+    <p-divider align="left">
+        <div class="inline-flex align-items-center">
+            <i class="pi pi-user mr-2"></i>
+            <b>Transportadora</b>
+        </div>
+    </p-divider>
+    <p>Veiculo</p>
+    <p>Motorista</p>
+    <p>Transportadora</p>
+    <p-divider align="left">
+        <div class="inline-flex align-items-center">
+            <i class="pi pi-user mr-2"></i>
+            <b>Gerador</b>
+        </div>
+    </p-divider>
+    <p>Gerador</p>
+    <p-divider align="left">
+        <div class="inline-flex align-items-center">
+            <i class="pi pi-user mr-2"></i>
+            <b>Destinatario</b>
+        </div>
+    </p-divider>
+    <p>Destinatario</p>
+    <p-divider align="left">
+        <div class="inline-flex align-items-center">
+            <i class="pi pi-user mr-2"></i>
+            <b>Discarte</b>
+        </div>
+    </p-divider>
+    <p>Discarte</p>
+    <p-divider align="left">
+        <div class="inline-flex align-items-center">
+            <i class="pi pi-user mr-2"></i>
+            <b>Pagamento</b>
+        </div>
+    </p-divider>
+    <p>Pagamento</p>
+</div>

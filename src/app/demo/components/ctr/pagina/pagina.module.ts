@@ -2,12 +2,12 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MessageService} from "primeng/api";
 import {PaginaRoutingModule} from "./pagina-routing.module";
-import { ViewComponent } from './view/view.component'
+import {ViewComponent} from './view/view.component'
 
 @NgModule({
     declarations: [
-    ViewComponent
-  ],
+        ViewComponent
+    ],
     imports: [
         CommonModule,
         PaginaRoutingModule
