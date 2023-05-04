@@ -54,7 +54,6 @@
             </div>
         </div>
     </div>
-
     <p-divider align="left">
         <div class="inline-flex align-items-center">
             <i class="pi pi-user mr-2"></i>
@@ -75,12 +74,60 @@
             <b>Descarte</b>
         </div>
     </p-divider>
-    <p>Discarte</p>
-    <p-divider align="left">
-        <div class="inline-flex align-items-center">
-            <i class="pi pi-user mr-2"></i>
-            <b>Pagamento</b>
+    <div class="flex-auto">
+        <div class="p-fluid p-formgrid grid">
+            <div class="field col-4">
+                <label for="tipo-descarte">Tipo de Descarte</label>
+                <app-auto-complete
+                    id="tipo-descarte"
+                    [service]="tipoDescarteService"
+                    (dataSelected)="onTipoDescarteSelecionado($event)">
+                </app-auto-complete>
+            </div>
+            <div class="field col-4">
+                <label for="tipo-descarte">Quantidade</label>
+                <p-inputNumber id="quantidade" mode="decimal"
+                               [(ngModel)]="quantidadeDescarte">
+                </p-inputNumber>
+            </div>
+            <div class="field col-2">
+                <label for="adicionar"> - </label>
+                <p-button id="adicionar" icon="pi pi-shopping-cart" label="Adicionar"
+                          [disabled]="tipoDescarteSelecionado.id === '' || quantidadeDescarte <= 0 "
+                          styleClass="mb-2 p-button-sm" (onClick)="adicionarDescarte()"></p-button>
+            </div>
+            <div class="field col-12">
+                <p-table *ngIf="ctr.tipoDescarte.length > 0" [value]="ctr.tipoDescarte"
+                         [tableStyle]="{ 'min-width': '50rem' }">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Nome</th>
+                            <th class="col-2">Ação</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-tipo>
+                        <tr>
+                            <td>{{ tipo.nome }}</td>
+                            <td class="col-2">
+                                <p-button id="remover" icon="pi pi-trash" label="Remover" styleClass="mb-2 p-button-sm"
+                                          (onClick)="removerItemDescarte(tipo)"></p-button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <hr>
+                        <span>Valor Total: {{valorTotal | currency: 'BRL'}}</span>
+                    </ng-template>
+                </p-table>
+            </div>
         </div>
-    </p-divider>
-    <p>Pagamento</p>
+        <p-divider align="left">
+            <div class="inline-flex align-items-center">
+                <i class="pi pi-user mr-2"></i>
+                <b>Pagamento</b>
+            </div>
+        </p-divider>
+        <p>Pagamento</p>
+    </div>
+    {{ctr | json}}
 </div>
