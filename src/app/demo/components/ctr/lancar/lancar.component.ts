@@ -51,8 +51,8 @@ export class LancarComponent {
     adicionarDescarte() {
         for (let i = 0; i < this.quantidadeDescarte; i++) {
             this.ctr.tipoDescarte.push(this.tipoDescarteSelecionado)
+            this.valorTotal += this.tipoDescarteSelecionado.valor
         }
-        this.valorTotal += this.tipoDescarteSelecionado.valor
         this.quantidadeDescarte = 1
     }
 
