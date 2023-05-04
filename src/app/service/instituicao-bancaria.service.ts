@@ -5,7 +5,6 @@ import {HttpClient} from "@angular/common/http";
 
 const INSTITUICAO_BANCARIA_RESOURCE: string = 'instituicao-bancaria'
 
-
 @Injectable({
   providedIn: 'root'
 })

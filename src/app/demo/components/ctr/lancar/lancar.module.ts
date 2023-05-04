@@ -8,6 +8,7 @@ import {ButtonModule} from "primeng/button";
 import {InputNumberModule} from "primeng/inputnumber";
 import {FormsModule} from "@angular/forms";
 import {CalendarModule} from "primeng/calendar";
+import {SharedModule} from "../../../../_shared/shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import {CalendarModule} from "primeng/calendar";
         InputNumberModule,
         FormsModule,
         CalendarModule,
+        SharedModule,
     ],
     providers: [MessageService]
 })

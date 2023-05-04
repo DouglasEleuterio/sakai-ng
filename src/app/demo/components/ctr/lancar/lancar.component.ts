@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {TransportadoraService} from "../../../../service/transportadora.service";
+import {VeiculoService} from "../../../../service/veiculo.service";
 
 @Component({
   selector: 'app-lancar',
@@ -7,14 +9,23 @@ import { Component } from '@angular/core';
 })
 export class LancarComponent {
 
-    ctr: { id: string; numero: number; data: Date}
-
-
-    constructor() {
-        this.ctr = {id: '', numero: 0, data: new Date()};
+    ctr = {
+        id: '',
+        numero: 0,
+        data: new Date(),
+        transportadora: {id: '', nome: ''},
+        veiculo: {id: '', nome: ''}
     }
 
-    getDataAgora() {
-        return new Date();
+    constructor(public transportadoraService: TransportadoraService,
+                public veiculoService: VeiculoService) {
+    }
+
+    onTransportadorSelecionado($event: {id: string, nome: string} ) {
+        this.ctr.transportadora.id = $event.id
+    }
+
+    onVeiculoSelecionado($event: {id: string, nome: string} ) {
+        this.ctr.veiculo.id = $event.id
     }
 }
