@@ -15,11 +15,12 @@ export class AutoCompleteComponent {
     @Input() disabled: boolean = false
     @Output() unselected = new EventEmitter<any>();
     @Output() clear = new EventEmitter<any>();
-    @Input() class: string = '';
+    @Input() class: string = ''
 
     selectedEntity: any[] = [];
     filteredEntity: any[] = [];
     data: any[] = [];
+    field: any = 'nome';
 
     constructor() {
     }
@@ -37,7 +38,12 @@ export class AutoCompleteComponent {
         const query = event.query;
         for (let i = 0; i < this.data.length; i++) {
             const data = this.data[i];
-            if (data.nome.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            if (data.nome && data.nome.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+                this.field = 'nome'
+                filtered.push(data);
+            }
+            else if (data.placa && data.placa.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+                this.field = 'placa'
                 filtered.push(data);
             }
         }
