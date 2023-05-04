@@ -45,7 +45,12 @@
                 </app-auto-complete>
             </div>
             <div class="field col-6">
-                <p>Motorista</p>
+                <label for="motorista">Motorista</label>
+                <app-auto-complete
+                    id="motorista"
+                    [service]="motoristaService"
+                    (dataSelected)="onMotoristaSelecionado($event)">
+                </app-auto-complete>
             </div>
         </div>
     </div>
@@ -67,7 +72,7 @@
     <p-divider align="left">
         <div class="inline-flex align-items-center">
             <i class="pi pi-user mr-2"></i>
-            <b>Discarte</b>
+            <b>Descarte</b>
         </div>
     </p-divider>
     <p>Discarte</p>
