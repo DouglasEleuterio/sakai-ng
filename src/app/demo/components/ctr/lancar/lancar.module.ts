@@ -12,6 +12,7 @@ import {SharedModule} from "../../../../_shared/shared/shared.module";
 import {TableModule} from "primeng/table";
 import {ToastModule} from "primeng/toast";
 import {RouterLink} from "@angular/router";
+import {RippleModule} from "primeng/ripple";
 
 @NgModule({
     declarations: [
@@ -29,6 +30,7 @@ import {RouterLink} from "@angular/router";
         TableModule,
         ToastModule,
         RouterLink,
+        RippleModule,
     ],
     providers: [MessageService]
 })
