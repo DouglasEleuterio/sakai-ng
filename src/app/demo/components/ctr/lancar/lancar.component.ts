@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TransportadoraService} from "../../../../service/transportadora.service";
 import {VeiculoService} from "../../../../service/veiculo.service";
 import {MotoristaService} from "../../../../service/motorista.service";
@@ -7,10 +7,12 @@ import {FormaPagamentoService} from "../../../../service/forma-pagamento.service
 import {InstituicaoBancariaService} from "../../../../service/instituicao-bancaria.service";
 import {CtrService} from "../../../../service/ctr.service";
 import {MessageService} from "primeng/api";
+import {Router} from "@angular/router";
 
 function instanciarPagamentoVazio() {
     return {
         id: '',
+        ativo: true,
         dataPagamento: new Date(),
         valor: 0,
         formaPagamento: {id: '', nome: ''},
@@ -24,10 +26,10 @@ function instanciarCTR() {
         id: '',
         numero: 0,
         geracao: new Date(),
-        transportadora: {id: '', nome: ''},
+        transportador: {id: '', nome: ''},
         veiculo: {id: '', nome: ''},
         motorista: {id: '', nome: ''},
-        tipoDescarte: [{id: '', nome: '', quantidade: 0, valor: 0}],
+        tipoDescartes: [{id: '', nome: '', quantidade: 0, valor: 0}],
         pagamentos: []
     }
 }
@@ -37,7 +39,7 @@ function instanciarCTR() {
     templateUrl: './lancar.component.html',
     styleUrls: ['./lancar.component.scss']
 })
-export class LancarComponent {
+export class LancarComponent implements OnInit{
 
     tipoDescarteSelecionado = {id: '', nome: '', quantidade: 0, valor: 0}
     quantidadeDescarte = 1
@@ -54,12 +56,16 @@ export class LancarComponent {
                 public formaPagamentoService: FormaPagamentoService,
                 public instituicaoBancariaService: InstituicaoBancariaService,
                 private ctrService: CtrService,
-                private messageService: MessageService) {
-        this.ctr.tipoDescarte.splice(0, 1)
+                private messageService: MessageService,
+                private router: Router) {
+        this.ctr.tipoDescartes.splice(0, 1)
+    }
+
+    ngOnInit(): void {
     }
 
     onTransportadorSelecionado($event: { id: string, nome: string }) {
-        this.ctr.transportadora.id = $event.id
+        this.ctr.transportador.id = $event.id
     }
 
     onVeiculoSelecionado($event: { id: string, placa: string }) {
@@ -76,17 +82,17 @@ export class LancarComponent {
 
     adicionarDescarte() {
         for (let i = 0; i < this.quantidadeDescarte; i++) {
-            this.ctr.tipoDescarte.push(this.tipoDescarteSelecionado)
+            this.ctr.tipoDescartes.push(this.tipoDescarteSelecionado)
             this.valorTotal += this.tipoDescarteSelecionado.valor
         }
         this.quantidadeDescarte = 1
     }
 
     removerItemDescarte($event: any) {
-        const index = this.ctr.tipoDescarte.indexOf($event, 0);
+        const index = this.ctr.tipoDescartes.indexOf($event, 0);
         if (index > -1) {
             this.valorTotal -= $event.valor
-            this.ctr.tipoDescarte.splice(index, 1);
+            this.ctr.tipoDescartes.splice(index, 1);
         }
     }
 
@@ -127,13 +133,13 @@ export class LancarComponent {
             this.messageService.add({
                 key: 'tst',
                 severity: 'success',
-                summary: data.status + ' Sucesso',
+                summary: ' Sucesso',
                 detail: 'CTR Nº ' + this.ctr.numero + ' cadastrado com Sucesso!',
-                life: 50000
+                life: 7000
             });
-            this.ctr = instanciarCTR()
+            this.ctr.numero = 0
         }, error => {
-            this.messageService.add({key: 'tst', severity: 'error', summary: 'Error', detail: error, life: 10000});
+            this.messageService.add({key: 'tst', severity: 'error', summary: 'Error', detail: error.message ?  error.message: error , life: 10000});
         })
     }
 }

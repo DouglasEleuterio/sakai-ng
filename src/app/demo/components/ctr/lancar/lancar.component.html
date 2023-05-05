@@ -1,3 +1,5 @@
+<p-toast key="tst"></p-toast>
+
 <div class="card">
     <p-divider align="left">
         <div class="inline-flex align-items-center">
@@ -54,20 +56,18 @@
             </div>
         </div>
     </div>
-    <p-divider align="left">
+    <p-divider *ngIf="false" align="left">
         <div class="inline-flex align-items-center">
             <i class="pi pi-user mr-2"></i>
             <b>Gerador</b>
         </div>
     </p-divider>
-    <p>Gerador</p>
-    <p-divider align="left">
+    <p-divider *ngIf="false" align="left">
         <div class="inline-flex align-items-center">
             <i class="pi pi-user mr-2"></i>
             <b>Destinatario</b>
         </div>
     </p-divider>
-    <p>Destinatario</p>
     <p-divider align="left">
         <div class="inline-flex align-items-center">
             <i class="pi pi-user mr-2"></i>
@@ -76,7 +76,7 @@
     </p-divider>
     <div class="flex-auto">
         <div class="p-fluid p-formgrid grid">
-            <div class="field col-4">
+            <div class="field col-6">
                 <label for="tipo-descarte">Tipo de Descarte</label>
                 <app-auto-complete
                     id="tipo-descarte"
@@ -84,20 +84,21 @@
                     (dataSelected)="onTipoDescarteSelecionado($event)">
                 </app-auto-complete>
             </div>
-            <div class="field col-4">
+            <div class="field col-6">
                 <label for="tipo-descarte">Quantidade</label>
                 <p-inputNumber id="quantidade" mode="decimal"
                                [(ngModel)]="quantidadeDescarte">
                 </p-inputNumber>
             </div>
-            <div class="field col-2">
-                <label for="adicionar"> - </label>
-                <p-button id="adicionar" icon="pi pi-shopping-cart" label="Adicionar Descarte"
+            <div class="col-10">
+            </div>
+            <div class="col-2">
+                <p-button id="adicionar" icon="pi pi-car" label="Adicionar Descarte"
                           [disabled]="tipoDescarteSelecionado.id === '' || quantidadeDescarte <= 0 "
                           styleClass="mb-2 p-button-sm" (onClick)="adicionarDescarte()"></p-button>
             </div>
             <div class="field col-12">
-                <p-table *ngIf="ctr.tipoDescarte.length > 0" [value]="ctr.tipoDescarte"
+                <p-table *ngIf="ctr.tipoDescartes.length > 0" [value]="ctr.tipoDescartes"
                          [tableStyle]="{ 'min-width': '50rem' }">
                     <ng-template pTemplate="header">
                         <tr>
@@ -117,7 +118,7 @@
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="footer">
-                        <hr>
+                        <p-divider></p-divider>
                         <span style="padding-right: 0">Valor Descarte Total: {{valorTotal | currency: 'BRL'}}</span>
                     </ng-template>
                 </p-table>
@@ -157,14 +158,23 @@
                 </div>
                 <div class="field col-6">
                     <label for="dataPagamento">Data de Pagamento</label>
-                    <p-calendar id="dataPagamento" [(ngModel)]="pagamento.dataPagamento" dateFormat="dd/mm/yy" [maxDate]="pagamento.dataPagamento"
+                    <p-calendar id="dataPagamento" [(ngModel)]="pagamento.dataPagamento" dateFormat="dd/mm/yy"
+                                [maxDate]="pagamento.dataPagamento"
                                 [showIcon]="true" inputId="icon">
                     </p-calendar>
                 </div>
             </div>
-            <p-button id="adicionarPagamento" icon="pi pi-shopping-cart" label="Adicionar Pagamento"
-                      [disabled]="pagamento.instituicaoBancaria.id === '' || pagamento.valor == 0 || pagamento.formaPagamento.id === ''"
-                      styleClass="mb-2 p-button-sm" (onClick)="adicionarPagamento()"></p-button>
+            <div class="flex-auto">
+                <div class="p-fluid p-formgrid grid">
+                    <div class="col-10">
+                    </div>
+                    <div class="col-2">
+                        <p-button id="adicionarPagamento" icon="pi pi-money-bill" label="Adicionar Pagamento"
+                                  [disabled]="pagamento.instituicaoBancaria.id === '' || pagamento.valor == 0 || pagamento.formaPagamento.id === ''"
+                                  styleClass="mb-2 p-button-sm" (onClick)="adicionarPagamento()"></p-button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="field col-12">
             <p-table *ngIf="ctr.pagamentos.length > 0" [value]="ctr.pagamentos"
@@ -187,19 +197,33 @@
                         <td>{{ pgtItem.valor | currency: 'BRL'}}</td>
                         <td>{{ pgtItem.dataPagamento | date: 'dd/MM/yyyy'}}</td>
                         <td class="col-2">
-                            <p-button id="removerPagamento" icon="pi pi-trash" label="Remover" styleClass="mb-2 p-button-sm"
+                            <p-button id="removerPagamento" icon="pi pi-trash" label="Remover"
+                                      styleClass="mb-2 p-button-sm"
                                       (onClick)="removerPagamento(pgtItem)"></p-button>
                         </td>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="footer">
-                    <hr>
-                    <span style="padding-right: 0">Valor Pagamentos Total: {{pagamentosTotais | currency: 'BRL'}}</span>
+                    <p-divider></p-divider>
+                    <span
+                        style="padding-right: 0">Valor Pagamentos Total: {{pagamentosTotais | currency: 'BRL'}}</span>
                 </ng-template>
             </p-table>
         </div>
     </div>
-    <p-button id="lancar" icon="pi pi-trash" label="Salvar" styleClass="mb-2 p-button-sm"
-              (onClick)="submit()"></p-button>
-    {{ctr | json}}
+    <p-divider></p-divider>
+    <div class="flex-auto">
+        <div class="p-fluid p-formgrid grid">
+            <div class="col-2">
+                <p-button id="limpar" icon="pi pi-eraser" label="Limpar" styleClass="mb-2 p-button-sm"
+                          [routerLink]="'/CTR/lancar'"></p-button>
+            </div>
+            <div class="col-8">
+            </div>
+            <div class="col-2">
+                <p-button id="lancar" icon="pi pi-save" label="Salvar" styleClass="mb-2 p-button-sm"
+                          [routerLink]="'/CTR/lancar'" (onClick)="submit()"></p-button>
+            </div>
+        </div>
+    </div>
 </div>

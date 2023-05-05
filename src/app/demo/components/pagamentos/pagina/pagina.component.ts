@@ -10,6 +10,7 @@ import {InstituicaoBancariaService} from "../../../../service/instituicao-bancar
 import {FormaPagamentoService} from "../../../../service/forma-pagamento.service";
 
 @Component({
+    providers:[MessageService],
     selector: 'app-pagina',
     templateUrl: './pagina.component.html',
     styleUrls: ['./pagina.component.scss']
@@ -78,7 +79,7 @@ export class PaginaComponent implements OnInit {
             this.pages = value.totalPages
             this.totalElements = value.totalElements
         }, error => {
-            this.messageService.add({key: 'tst', severity: 'error', summary: 'Error', detail: error, life: 5000});
+            this.messageService.add({key: 'tst', severity: 'error', summary: 'Error', detail: error.message ?  error.message: error  , life: 5000});
             this.loading = false
         })
     }

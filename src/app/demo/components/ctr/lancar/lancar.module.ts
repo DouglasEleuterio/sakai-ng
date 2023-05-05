@@ -10,6 +10,8 @@ import {FormsModule} from "@angular/forms";
 import {CalendarModule} from "primeng/calendar";
 import {SharedModule} from "../../../../_shared/shared/shared.module";
 import {TableModule} from "primeng/table";
+import {ToastModule} from "primeng/toast";
+import {RouterLink} from "@angular/router";
 
 @NgModule({
     declarations: [
@@ -25,6 +27,8 @@ import {TableModule} from "primeng/table";
         CalendarModule,
         SharedModule,
         TableModule,
+        ToastModule,
+        RouterLink,
     ],
     providers: [MessageService]
 })
