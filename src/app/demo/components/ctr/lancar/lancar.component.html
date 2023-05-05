@@ -14,7 +14,7 @@
             </div>
             <div class="field col-6">
                 <label for="data">Data Inicio</label>
-                <p-calendar id="data" [(ngModel)]="ctr.data" dateFormat="dd/mm/yy" [maxDate]="ctr.data"
+                <p-calendar id="data" [(ngModel)]="ctr.geracao" dateFormat="dd/mm/yy" [maxDate]="ctr.geracao"
                             [showIcon]="true" inputId="icon">
                 </p-calendar>
             </div>
@@ -92,7 +92,7 @@
             </div>
             <div class="field col-2">
                 <label for="adicionar"> - </label>
-                <p-button id="adicionar" icon="pi pi-shopping-cart" label="Adicionar"
+                <p-button id="adicionar" icon="pi pi-shopping-cart" label="Adicionar Descarte"
                           [disabled]="tipoDescarteSelecionado.id === '' || quantidadeDescarte <= 0 "
                           styleClass="mb-2 p-button-sm" (onClick)="adicionarDescarte()"></p-button>
             </div>
@@ -118,7 +118,7 @@
                     </ng-template>
                     <ng-template pTemplate="footer">
                         <hr>
-                        <span style="padding-right: 0px">Valor Total: {{valorTotal | currency: 'BRL'}}</span>
+                        <span style="padding-right: 0">Valor Descarte Total: {{valorTotal | currency: 'BRL'}}</span>
                     </ng-template>
                 </p-table>
             </div>
@@ -129,7 +129,77 @@
                 <b>Pagamento</b>
             </div>
         </p-divider>
-        <p>Pagamento</p>
+        <div class="flex-auto">
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-6">
+                    <label for="forma-pagamento">Forma de Pagamento</label>
+                    <app-auto-complete
+                        id="forma-pagamento"
+                        [service]="formaPagamentoService"
+                        (dataSelected)="onFormaPagamentoSelecionado($event)">
+                    </app-auto-complete>
+                </div>
+                <div class="field col-6">
+                    <label for="instituicao-bancaria">Instituição Bancária</label>
+                    <app-auto-complete
+                        id="instituicao-bancaria"
+                        [service]="instituicaoBancariaService"
+                        (dataSelected)="onInstituicaoBancariaSelecionado($event)">
+                    </app-auto-complete>
+                </div>
+            </div>
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-6">
+                    <label for="valor">Valor</label>
+                    <p-inputNumber id="valor" mode="decimal"
+                                   [(ngModel)]="pagamento.valor">
+                    </p-inputNumber>
+                </div>
+                <div class="field col-6">
+                    <label for="dataPagamento">Data de Pagamento</label>
+                    <p-calendar id="dataPagamento" [(ngModel)]="pagamento.dataPagamento" dateFormat="dd/mm/yy" [maxDate]="pagamento.dataPagamento"
+                                [showIcon]="true" inputId="icon">
+                    </p-calendar>
+                </div>
+            </div>
+            <p-button id="adicionarPagamento" icon="pi pi-shopping-cart" label="Adicionar Pagamento"
+                      [disabled]="pagamento.instituicaoBancaria.id === '' || pagamento.valor == 0 || pagamento.formaPagamento.id === ''"
+                      styleClass="mb-2 p-button-sm" (onClick)="adicionarPagamento()"></p-button>
+        </div>
+        <div class="field col-12">
+            <p-table *ngIf="ctr.pagamentos.length > 0" [value]="ctr.pagamentos"
+                     [tableStyle]="{ 'min-width': '50rem' }">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Item</th>
+                        <th>Forma Pagamento</th>
+                        <th>Instituição Bancária</th>
+                        <th>Valor</th>
+                        <th>Data do Pagamento</th>
+                        <th class="col-2">Ação</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-pgtItem>
+                    <tr>
+                        <td>{{pgtItem.item}}</td>
+                        <td>{{ pgtItem.formaPagamento.nome }}</td>
+                        <td>{{ pgtItem.instituicaoBancaria.nome}}</td>
+                        <td>{{ pgtItem.valor | currency: 'BRL'}}</td>
+                        <td>{{ pgtItem.dataPagamento | date: 'dd/MM/yyyy'}}</td>
+                        <td class="col-2">
+                            <p-button id="removerPagamento" icon="pi pi-trash" label="Remover" styleClass="mb-2 p-button-sm"
+                                      (onClick)="removerPagamento(pgtItem)"></p-button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <hr>
+                    <span style="padding-right: 0">Valor Pagamentos Total: {{pagamentosTotais | currency: 'BRL'}}</span>
+                </ng-template>
+            </p-table>
+        </div>
     </div>
+    <p-button id="lancar" icon="pi pi-trash" label="Salvar" styleClass="mb-2 p-button-sm"
+              (onClick)="submit()"></p-button>
     {{ctr | json}}
 </div>
