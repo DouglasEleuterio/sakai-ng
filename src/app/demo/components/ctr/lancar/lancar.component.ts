@@ -127,7 +127,7 @@ export class LancarComponent {
             this.messageService.add({
                 key: 'tst',
                 severity: 'success',
-                summary: data.status + 'Sucesso',
+                summary: data.status + ' Sucesso',
                 detail: 'CTR Nº ' + this.ctr.numero + ' cadastrado com Sucesso!',
                 life: 50000
             });
