@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit{
         private authenticationService: LoginService
     ) {
         if (this.authenticationService.userValue) {
-            this.router.navigate(["/"]);
+            this.router.navigate(["/CTR/lancar"]);
         }
     }
 
@@ -66,8 +66,8 @@ export class LoginComponent implements OnInit{
                 next: () => {
                     // get return url from route parameters or default to '/'
                     //TODO implementar
-                    const returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
-                    this.router.navigate([returnUrl]);
+                    // const returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/CTR/lancar";
+                    this.router.navigate(["/CTR/lancar"]);
                 },
                 error: (err) => {
                     if (err) {
