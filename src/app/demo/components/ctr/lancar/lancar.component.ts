@@ -137,9 +137,14 @@ export class LancarComponent implements OnInit{
                 detail: 'CTR Nº ' + this.ctr.numero + ' cadastrado com Sucesso!',
                 life: 7000
             });
-            this.ctr.numero = 0
+            this.limpar()
         }, error => {
             this.messageService.add({key: 'tst', severity: 'error', summary: 'Error', detail: error.message ?  error.message: error , life: 10000});
         })
+    }
+
+    limpar() {
+        this.ctr.numero = 0
+        this.ctr.geracao = new Date()
     }
 }

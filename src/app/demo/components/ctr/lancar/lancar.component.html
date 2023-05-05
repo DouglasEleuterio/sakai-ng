@@ -15,8 +15,8 @@
                                [useGrouping]="false"></p-inputNumber>
             </div>
             <div class="field col-6">
-                <label for="data">Data Inicio</label>
-                <p-calendar id="data" [(ngModel)]="ctr.geracao" dateFormat="dd/mm/yy" [maxDate]="ctr.geracao"
+                <label for="data">Data Descarte</label>
+                <p-calendar id="data" [(ngModel)]="ctr.geracao" [showSeconds]="true" [showTime]="true" dateFormat="dd/mm/yy" [maxDate]="ctr.geracao"
                             [showIcon]="true" inputId="icon">
                 </p-calendar>
             </div>
@@ -217,7 +217,7 @@
         <div class="p-fluid p-formgrid grid">
             <div class="col-2">
                 <button pButton pRipple type="button" id="limpar" icon="pi pi-eraser" label="Limpar" class="p-button-raised p-button-warning"
-                          [routerLink]="'/CTR/lancar'"></button>
+                          (click)="limpar()"></button>
 <!--                <button pButton pRipple type="button" label="Warning" class="p-button-raised p-button-warning"></button>-->
             </div>
             <div class="col-8">
