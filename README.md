@@ -1,27 +1,49 @@
-# Sakai
+### Iniciando a aplicação
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.4.
+*  Na pasta raiz, executar o comando `npm install`
+*  Executar a aplicação `npm run start`
+*  Acessar aplicação: http://localhost:4201
 
-## Development server
+### Formatação e verificação do código
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+O projeto utiliza o ESLint:https://eslint.org/ para verificação das regras do TypeScript e o
+https://prettier.io/ para deixar o código organizado.
 
-## Code scaffolding
+1. Para verificar se o existe algum problema com o código, executar `ng lint`
+2. Para verificar e corrigir problemas apontados pelo prettier, executar `ng lint --fix`
+3. Outra opção para formatar todo o código é executar `prettier --write .`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Configurando o .env
 
-## Build
+Para o ambiente de desenvolvimento, basta acessar a pasta src/assets/config/envs e substituir
+o `environment.dev.json` para `environment.json`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Compilando arquivos scss
 
-## Running unit tests
+1. Instale o sass globalmente: `npm install -g sass`
+2. Escolha o tema que deseja alterar ou todos como no exemplo abaixo e recompile utilizando o comando:
+   `sass --no-source-map src/assets/theme/:src/assets/theme/`
+3. Caso deseje ficar escutando de e compilando de forma automatica, basta executar o comando:
+   `sass --watch src/:src/ --no-source-map`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Docker de release
 
-## Running end-to-end tests
+O projeto contém uma pasta chamada docker, onde está configurado o docker, docker-compose, envs e o arquivo de configuração
+do nginx para a publicação de produção.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Utilizando o replace de version
+Para realizar o replace da versão de forma dinâmica, basta executar o comando:
 
-## Further help
+npm run replace-version --build_version=1.1.0 --env_file="./src/environments/environment.*"
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Template e UI Lib
+O projeto utiliza a biblioteca primeng e o template atlantis.
+
+As documentações destes respectivos pacotes se encontram:
+1. https://primeng.org/
+2. https://www.primefaces.org/atlantis-ng/
+
+
+### Favicon
+Para gerar um favicon com as informações necessárias para todos, basta usar o
+https://realfavicongenerator.net/

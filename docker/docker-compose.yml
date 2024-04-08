@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  front:
+    build: .
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ./envs:/usr/share/nginx/html/crm/assets/config/envs
+    environment:
+      - TZ=America/Araguaina
+    networks:
+      - crm_network
+
+networks:
+  crm_network:
+    driver: bridge

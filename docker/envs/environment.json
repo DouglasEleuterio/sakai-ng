@@ -1,0 +1,17 @@
+{
+  "baseUrl": "http://localhost:8085",
+  "authLoginUrl": "http://localhost:8085/auth/token",
+  "authLogoutUrl": "http://localhost:8085/auth/logout",
+  "authCodeUrl": "https://keycloak-teste.fabricacrp.com.br/auth/realms/TRE-SC/protocol/openid-connect/auth",
+  "authClientId": "auge",
+  "authCallbackUrl": "http://localhost:4201/oauth/authorize/callback",
+  "authNonce": false,
+  "authChallenge": false,
+  "authScope": "profile offline_access",
+  "authAuthorizationResponseType": "code",
+  "authAuthorizationSecretKey": false,
+  "authParamsType": "query",
+  "authBasicAuthorization": false,
+  "authSendClientIdClientSecret": false,
+  "validationJsonMode": false
+}
