@@ -1,4 +1,4 @@
-FROM node:14.21.3-alpine AS build
+FROM node:18.13-alpine AS build
 
 ARG VERSION
 

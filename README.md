@@ -1,3 +1,6 @@
+### Implantação da Aplicação em Ambiente Docker
+https://dev.to/oneofthedevs/docker-angular-nginx-37e4
+
 ### Iniciando a aplicação
 
 *  Na pasta raiz, executar o comando `npm install`
