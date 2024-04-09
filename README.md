@@ -50,3 +50,18 @@ As documentações destes respectivos pacotes se encontram:
 ### Favicon
 Para gerar um favicon com as informações necessárias para todos, basta usar o
 https://realfavicongenerator.net/
+
+
+### Build do Docker
+* Gerar imagem
+````
+docker build -t crm-app:v1.0.0 -f ./Dockerfile .
+````
+* Checar imagem
+````
+docker image ls
+````
+
+* Subir container com aplicação
+````
+docker run -p 8000:80 -d crm-app:v1.0.0
