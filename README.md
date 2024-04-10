@@ -55,7 +55,7 @@ https://realfavicongenerator.net/
 ### Build do Docker
 * Gerar imagem
 ````
-docker build -t crm-app:v1.0.0 -f ./Dockerfile .
+docker build --build-arg VERSION=1.0.6 -t crm-app:v1.0.6 -f ./Dockerfile .
 ````
 * Checar imagem
 ````
@@ -64,4 +64,7 @@ docker image ls
 
 * Subir container com aplicação
 ````
-docker run -p 8000:80 -d crm-app:v1.0.0
+docker run -p 4200:4200 -d crm-app:v1.0.0
+````
+[//]: # (Pegar Certificado Traeik)
+https://github.com/traefik/traefik/issues/2418
