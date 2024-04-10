@@ -77,3 +77,7 @@ docker run -p 4200:4200 -d crm-app:v1.0.0
 ````
 [//]: # (Pegar Certificado Traeik)
 https://github.com/traefik/traefik/issues/2418
+
+
+#### Tela de detalhes do paciente
+/crm/paciente/detail/{id}
