@@ -54,9 +54,18 @@ https://realfavicongenerator.net/
 
 ### Build do Docker
 * Gerar imagem
+
 ````
-docker build --build-arg VERSION=1.0.6 -t crm-app:v1.0.6 -f ./Dockerfile .
+docker build -t crm-app:v1.0.6 --build-arg VERSION=1.0.6 .
 ````
+````
+docker tag crm-app:v1.0.6 douglaseleuterioferreira/apps:crm-app
+````
+
+````
+docker push douglaseleuterioferreira/apps:crm-app
+````
+
 * Checar imagem
 ````
 docker image ls
