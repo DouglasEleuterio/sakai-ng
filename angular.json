@@ -26,12 +26,19 @@
                         "tsConfig": "tsconfig.app.json",
                         "inlineStyleLanguage": "scss",
                         "assets": [
-                            "src/favicon.ico",
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss"
+                            "src/styles.scss",
+                            "node_modules/primeicons/primeicons.css",
+                            "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+                            "node_modules/primeng/resources/primeng.min.css"
                         ],
+                        "stylePreprocessorOptions": {
+                            "includePaths": [
+                                "node_modules/"
+                            ]
+                        },
                         "scripts": []
                     },
                     "configurations": {
@@ -130,6 +137,6 @@
         }
     },
     "cli": {
-      "analytics": "80ebebc2-14f2-4620-9a5c-53048fc85534"
+        "analytics": "80ebebc2-14f2-4620-9a5c-53048fc85534"
     }
 }
