@@ -56,12 +56,11 @@ https://realfavicongenerator.net/
 * Gerar imagem
 
 ````
-docker build -t crm-app:v1.0.6 --build-arg VERSION=1.0.6 .
+docker build -t crm-app:v1.0.1 --build-arg VERSION=1.0.1 .
 ````
 ````
-docker tag crm-app:v1.0.6 douglaseleuterioferreira/apps:crm-app
+docker tag crm-app:v1.0.1 douglaseleuterioferreira/apps:crm-app
 ````
-
 ````
 docker push douglaseleuterioferreira/apps:crm-app
 ````
