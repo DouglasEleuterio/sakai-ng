@@ -4,6 +4,7 @@ import {DetailComponent} from "./pages/detail/detail.component";
 import {PacienteRoutingModule} from "./paciente-routing.module";
 import {ButtonModule} from "primeng/button";
 import {StepperModule} from "primeng/stepper";
+import {MenuModule} from "primeng/menu";
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {StepperModule} from "primeng/stepper";
         CommonModule,
         PacienteRoutingModule,
         ButtonModule,
-        StepperModule
+        StepperModule,
+        MenuModule
     ]
 })
 export class PacienteModule { }
