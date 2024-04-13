@@ -54,6 +54,10 @@ https://realfavicongenerator.net/
 
 ### Build do Docker
 * Gerar imagem
+````
+docker login -u douglaseleuterioferreira
+Fox789789@!
+````
 
 ````
 docker build -t crm-app:v1.0.1 --build-arg VERSION=1.0.1 .

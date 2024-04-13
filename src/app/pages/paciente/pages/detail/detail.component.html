@@ -2,46 +2,7 @@
     <p-stepper style="flex-basis: 80rem">
         <p-stepperPanel header="Cliente">
             <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
-                <div class="flex justify-content-end h-4rem flex-wrap">
-                    <p-button severity="warning" [raised]="true" label="Alterar" icon="pi pi-user-edit" iconPos="right"
-                              (onClick)="edit = !edit"/>
-                </div>
-                <div class="flex flex-column" *ngIf="!edit">
-                    <div class="border-2 border-dashed surface-border border-round surface-ground justify-content-between flex font-medium">
-                        <div class="flex align-items-center justify-content-center border-round m-2">
-                            <ul class="list-none p-5 m-5">
-                                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-                                    <div>
-                                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Nome:</span>
-                                        <div class="mt-1 text-600">Douglas Eleutério Ferreira</div>
-                                    </div>
-                                </li>
-                                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-                                    <div>
-                                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Telefone:</span>
-                                        <div class="mt-1 text-600">62985606521</div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="flex align-items-center justify-content-center border-round m-2">
-                            <ul class="list-none p-5 m-5">
-                                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-                                    <div>
-                                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Genero:</span>
-                                        <div class="mt-1 text-600">Masculino</div>
-                                    </div>
-                                </li>
-                                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-                                    <div>
-                                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Idade:</span>
-                                        <div class="mt-1 text-600">33 Anos</div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <app-cliente-painel></app-cliente-painel>
                 <div class="flex pt-4 justify-content-end">
                     <p-button [raised]="true" label="Próximo" icon="pi pi-arrow-right" iconPos="right"
                               (onClick)="nextCallback.emit()"/>
@@ -51,31 +12,19 @@
         <p-stepperPanel header="Procedimento">
             <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback"
                          let-index="index">
-                <div class="flex flex-column h-12rem">
-                    <div
-                        class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-                        Content II
-                    </div>
-                </div>
+                <app-procedimento-painel></app-procedimento-painel>
                 <div class="flex pt-4 justify-content-between">
                     <p-button label="Back" icon="pi pi-arrow-left" (onClick)="prevCallback.emit()"/>
                     <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()"/>
-                </div
-                >
+                </div>
             </ng-template>
         </p-stepperPanel>
         <p-stepperPanel header="Outros">
             <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
-                <div class="flex flex-column h-12rem">
-                    <div
-                        class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-                        Content III
-                    </div>
-                </div>
+                <app-outros-painel></app-outros-painel>
                 <div class="flex pt-4 justify-content-start">
                     <p-button label="Back" icon="pi pi-arrow-left" (onClick)="prevCallback.emit()"/>
-                </div
-                >
+                </div>
             </ng-template>
         </p-stepperPanel>
     </p-stepper>

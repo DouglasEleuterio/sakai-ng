@@ -12,6 +12,5 @@ import { Component } from '@angular/core';
     ]
 })
 export class DetailComponent {
-    edit: boolean = false;
 
 }
