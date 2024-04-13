@@ -1,6 +1,4 @@
-<div class="flex flex-column h-12rem">
-    <div
-        class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-        Content III
-    </div>
-</div>
+<p-editor #editor
+    (onTextChange)=onTextChange($event)
+    [(ngModel)]="editorService.text" [style]="{ height: '320px' }">
+</p-editor>

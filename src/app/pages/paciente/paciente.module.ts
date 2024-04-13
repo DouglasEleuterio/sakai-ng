@@ -8,6 +8,8 @@ import {MenuModule} from "primeng/menu";
 import {PacientePainelComponent} from "./pages/detail/cliente-painel/paciente-painel.component";
 import {ProcedimentoPainelComponent} from "./pages/detail/procedimento-painel/procedimento-painel.component";
 import {OutrosPainelComponent} from "./pages/detail/outros-painel/outros-painel.component";
+import {EditorModule} from "primeng/editor";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import {OutrosPainelComponent} from "./pages/detail/outros-painel/outros-painel.
         PacienteRoutingModule,
         ButtonModule,
         StepperModule,
-        MenuModule
+        MenuModule,
+        EditorModule,
+        FormsModule
     ]
 })
 export class PacienteModule { }
