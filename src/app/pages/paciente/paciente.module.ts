@@ -10,6 +10,18 @@ import {ProcedimentoPainelComponent} from "./pages/detail/procedimento-painel/pr
 import {OutrosPainelComponent} from "./pages/detail/outros-painel/outros-painel.component";
 import {EditorModule} from "primeng/editor";
 import {FormsModule} from "@angular/forms";
+import {DialogModule} from "primeng/dialog";
+import {DropdownModule} from "primeng/dropdown";
+import {AutoFocusModule} from "primeng/autofocus";
+import {AvatarModule} from "primeng/avatar";
+import {ChipsModule} from "primeng/chips";
+import {CalendarModule} from "primeng/calendar";
+import {PaginatorModule} from "primeng/paginator";
+import {RippleModule} from "primeng/ripple";
+import {CheckboxModule} from "primeng/checkbox";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {MultiSelectModule} from "primeng/multiselect";
+import {RatingModule} from "primeng/rating";
 
 
 @NgModule({
@@ -26,7 +38,19 @@ import {FormsModule} from "@angular/forms";
         StepperModule,
         MenuModule,
         EditorModule,
-        FormsModule
+        FormsModule,
+        DialogModule,
+        DropdownModule,
+        AutoFocusModule,
+        AvatarModule,
+        ChipsModule,
+        CalendarModule,
+        PaginatorModule,
+        RippleModule,
+        CheckboxModule,
+        InputTextareaModule,
+        MultiSelectModule,
+        RatingModule
     ]
 })
 export class PacienteModule { }

@@ -1,6 +1,7 @@
 <div class="flex justify-content-end h-4rem flex-wrap">
     <p-button severity="success" [raised]="true" label="Incluir" icon="pi pi-plus" iconPos="right"
-              (onClick)="edit = !edit"/>
+              (onClick)=incluir()>
+    </p-button>
 </div>
 <div class="flex flex-column" *ngIf="!edit">
     <div *ngFor="let proc of procedimentos"
@@ -61,3 +62,52 @@
         </div>
     </div>
 </div>
+<p-dialog header="Header"
+          closable="true"
+          [blockScroll]="true"
+          [(visible)]="visible"
+          [style]="{ width: '100vw', height: '100vw' }"
+          [maximizable]="true">
+    <ng-template pTemplate="header">
+        <div class="inline-flex align-items-center justify-content-center gap-2">
+            <span class="font-bold white-space-nowrap">Informar Novo Procedimento</span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="body">
+        <!--        <div class="surface-ground px-4 py-8 md:px-6 lg:px-8">-->
+        <div class="grid formgrid p-fluid">
+            <div class="field mb-4 col-12 md:col-6">
+                <label for="nome" class="font-medium text-900">Procedimentos</label>
+                <p-multiSelect id="nome" [options]="tiposProcedimentos" [(ngModel)]="procedimentosSelecionados"
+                               placeholder="Selecione os Procedimentos"
+                               optionLabel="name" display="chip" [showClear]="true"></p-multiSelect>
+            </div>
+            <div class="field mb-6 col-12 md:col-6">
+                <label for="customer_name" class="font-medium text-900">Motivação</label>
+                <input id="customer_name" type="text" pInputText>
+            </div>
+            <div class="field mb-6 col-12 md:col-5">
+                <label for="due_date" class="font-medium text-900">Data</label>
+                <p-calendar id="due_date" [showIcon]="true"></p-calendar>
+            </div>
+            <div class="field mb-6 col-6 md:col-5">
+                <label for="valor" class="font-medium text-900">Valor</label>
+                <div class="flex align-content-center">
+                    <p-inputNumber id="valor" mode="currency" currency="BRL" inputId="item" type="text"
+                                   class="flex-1"></p-inputNumber>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-danger p-button-text ml-2"></button>
+                </div>
+            </div>
+            <div class="field mb-6 col-12 md:col-2">
+                <label for="satisfacao" class="font-medium text-900">Nível de Satisfação</label>
+                <div class="flex align-content-center">
+                    <p-rating id="satisfacao" [(ngModel)]="satisfacao" [cancel]="false"></p-rating>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="visible = false" label="Salvar" pAutoFocus [autofocus]="false"
+                  severity="success"></p-button>
+    </ng-template>
+</p-dialog>

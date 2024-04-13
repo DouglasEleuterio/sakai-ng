@@ -14,7 +14,7 @@ export class EditorService {
   }
 
     private valorObitidoAPI() {
-        return 'Valor inserido am sessões anteriores.'
+        return 'Valor inserido em sessões anteriores.'
     }
 
     salvar() {
