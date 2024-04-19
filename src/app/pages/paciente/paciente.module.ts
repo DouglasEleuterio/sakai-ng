@@ -22,6 +22,7 @@ import {CheckboxModule} from "primeng/checkbox";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {MultiSelectModule} from "primeng/multiselect";
 import {RatingModule} from "primeng/rating";
+import {TagModule} from "primeng/tag";
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import {RatingModule} from "primeng/rating";
         CheckboxModule,
         InputTextareaModule,
         MultiSelectModule,
-        RatingModule
+        RatingModule,
+        TagModule
     ]
 })
 export class PacienteModule { }

@@ -1,7 +1,15 @@
 import {Component} from '@angular/core';
 
-class Procedimento{
+class TipoProcedimento{
     name: string
+}
+
+class Procedimento {
+    procedimentos: TipoProcedimento[]
+    date: Date
+    valor: number
+    satisfacao: number
+    motivacao: string
 }
 
 @Component({
@@ -10,23 +18,33 @@ class Procedimento{
   styleUrl: './procedimento-painel.component.scss'
 })
 export class ProcedimentoPainelComponent {
-    edit: boolean;
-    public procedimentos: {
-        nome: string, date: string, valor: string, satisfacao: number, motivacao: string} [] = [
-        {nome: 'Clareamento de Pele', date: '01/01/2023', valor: 'R$ 1.800,00', satisfacao: 4, motivacao: 'Manchas de Sol'},
-        {nome: 'Pelling de Cristal', date: '01/09/2023', valor: 'R$ 800,00', satisfacao: 2, motivacao: 'Acnes e espinhas'}
-    ];
-    visible: boolean = false;
-    tiposProcedimentos: Procedimento[] | undefined = [
+    edit: boolean
+    visible: boolean = false
+    procedimento: Procedimento
+    procedimentos: Procedimento[] = [
+        {procedimentos: [{name: 'Clareamento de Pele'}], date: new Date(2023,1,1), valor: 1800, satisfacao: 4, motivacao: 'Manchas de Sol'},
+        {procedimentos: [{name: 'Pelling de Cristal'}], date: new Date(2023, 9, 1), valor: 800, satisfacao: 2, motivacao: 'Acnes e espinhas'}
+    ]
+    tiposProcedimentos: TipoProcedimento[] | undefined = [
         {name: 'Botox'},
         {name: 'Clareamento de Pele'},
         {name: 'Pelling de Cristal'},
-    ];
-    selectedCity: Procedimento;
-    procedimentosSelecionados: Procedimento [];
-    satisfacao!: number;
+    ]
 
     incluir() {
-        this.visible = true;
+        this.visible = true
+        this.procedimento = new Procedimento()
+    }
+
+    editar(proc: Procedimento) {
+        this.visible = true
+        this.procedimento = proc
+        console.log(proc)
+    }
+
+    salvar() {
+        this.visible = false
+        this.procedimentos.push(this.procedimento)
+        this.procedimento = new Procedimento()
     }
 }

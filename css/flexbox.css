@@ -1,0 +1,24 @@
+.container {
+    background-color: #eee;
+    border: 2px solid red;
+    padding: 15px;
+    max-width: 300px;
+    height: 300px;
+
+    display: flex;
+    /*Alinhamento horizontal*/
+    justify-content: space-between;
+
+    /*Alinhamento vertical*/
+    align-items: center;
+
+    /* Organizando Itens na linha */
+    flex-wrap: wrap;
+}
+
+.item {
+    background-color: #CCC;
+    border: solid 2px blue;
+    height: 50px;
+    width: 50px;
+}

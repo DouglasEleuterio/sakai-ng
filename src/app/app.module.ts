@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule} from '@angular/core';
 import {HashLocationStrategy, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -19,6 +19,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     imports: [AppRoutingModule, AppLayoutModule, BrowserModule, BrowserAnimationsModule],
     providers: [
         {provide: LocationStrategy, useClass: PathLocationStrategy},
+        {provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL'},
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService
     ],
