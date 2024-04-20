@@ -55,8 +55,7 @@ https://realfavicongenerator.net/
 ### Build do Docker
 * Gerar imagem
 ````
-docker login -u douglaseleuterioferreira
-Fox789789@!
+docker login -u douglaseleuterioferreira --password-stdin Fox789789@! 
 ````
 
 ````
