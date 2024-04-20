@@ -5,7 +5,7 @@
 </div>
 <div class="flex flex-column" *ngIf="!edit">
     <div *ngFor="let proc of procedimentos"
-         class="border-2 border-dashed surface-border border-round surface-ground justify-content-between flex font-medium">
+         class="border-2 max-h-12rem border-dashed surface-border border-round surface-ground justify-content-between flex font-medium">
         <div class="flex align-items-center justify-content-center border-round m-2">
             <ul class="list-none p-5 m-5">
                 <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
@@ -50,7 +50,7 @@
             </ul>
         </div>
         <div class="flex align-items-center justify-content-center border-round m-2">
-            <ul class="list-none p-5 m-5">
+            <ul class="list-none p-5 m-5 flex-wrap">
                 <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
                     <div>
                         <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Motivação:</span>
@@ -58,20 +58,21 @@
                     </div>
                 </li>
             </ul>
+            <div class="justify-content-start h-3rem flex-wrap">
+                <a (click)="editar(proc)">Alterar</a>
+            </div>
         </div>
-        <div class="flex justify-content-start h-3rem flex-wrap">
-            <a (click)="editar(proc)">Alterar</a>
-        </div>
+
     </div>
 </div>
-<p-dialog [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+<p-dialog
           appendTo="body"
           header="Header"
           closable="true"
           [modal]="true"
           [blockScroll]="true"
           [(visible)]="visible"
-          [style]="{ width: '110vw', height: '130vw'}"
+          [style]="{ width: '80vw', height: '25vw'}"
           [maximizable]="true">
     <ng-template pTemplate="header">
         <div class="inline-flex align-items-center justify-content-center gap-2">
@@ -109,7 +110,6 @@
                 </div>
             </div>
         </div>
-        {{procedimento | json}}
     </ng-template>
     <ng-template pTemplate="footer">
         <div class="flex justify-content-between flex-wrap">
