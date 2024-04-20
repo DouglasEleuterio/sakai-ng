@@ -11,43 +11,61 @@ import {TipoProcedimento} from "../../../../../model/tipo-procedimento-model";
 })
 export class ProcedimentoPainelComponent implements OnInit{
 
-    procedimentos: Procedimento[]
-
+    procedimentos: Procedimento[] = []
+    procedimento: Procedimento
+    tiposProcedimentos: TipoProcedimento[] = []
+    edit: boolean
+    visible: boolean = false
 
     constructor(private procedimentoService: ProcedimentoService) {
+        this.procedimento = new Procedimento();
     }
 
     ngOnInit(): void {
         this.procedimentoService.getProcedimentos('').subscribe((value) => {
-            this.procedimentos.push(value)
+            this.procedimentos = value
+        })
+
+        this.procedimentoService.getTiposProcedimentos().subscribe((value) => {
+            this.tiposProcedimentos = value
         })
     }
 
-    edit: boolean
-    visible: boolean = false
-    procedimento: Procedimento
-        // [
-        // {procedimentos: [{name: 'Clareamento de Pele'}], date: new Date(2023,1,1), valor: 1800, satisfacao: 4, motivacao: 'Manchas de Sol'},
-        // {procedimentos: [{name: 'Pelling de Cristal'}], date: new Date(2023, 9, 1), valor: 800, satisfacao: 2, motivacao: 'Acnes e espinhas'}
-        // ]
-    tiposProcedimentos: TipoProcedimento[] | undefined = [
-        {name: 'Botox'},
-        {name: 'Clareamento de Pele'},
-        {name: 'Pelling de Cristal'},
-    ]
-
     incluir() {
         this.visible = true
+        this.procedimento = new Procedimento()
     }
 
     editar(proc: Procedimento) {
+        this.procedimento = {...proc}
         this.visible = true
-        this.procedimento = proc
-        console.log(proc)
     }
 
     salvar() {
         this.visible = false
-        this.procedimentos.push(this.procedimento)
+        if(this.procedimento.id) {
+        this.procedimentoService.editarProcedimento(this.procedimento).subscribe((value) => {
+                this.procedimentos = value
+            })
+        } else {
+            this.procedimentoService.criar(this.procedimento).subscribe((value) => {
+                this.procedimentos = value
+            })
+        }
+        this.procedimento = new Procedimento()
+    }
+
+    cancelar() {
+        this.visible = false
+        this.procedimento = new Procedimento()
+    }
+
+    validarForm() {
+        return !(this.procedimento.procedimentos &&
+        this.procedimento.procedimentos.length > 0 &&
+        this.procedimento.date &&
+        this.procedimento.valor &&
+        this.procedimento.satisfacao &&
+        this.procedimento.motivacao)
     }
 }
