@@ -10,7 +10,7 @@
             <ul class="list-none p-5 m-5">
                 <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
                     <div>
-                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Procedimento:</span>
+                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">ProcedimentoModel:</span>
                         <div *ngFor="let procedimento of proc.procedimentos">
                             <p-tag severity="info" [value]="procedimento.name"></p-tag>
                         </div>
@@ -76,7 +76,7 @@
           [maximizable]="true">
     <ng-template pTemplate="header">
         <div class="inline-flex align-items-center justify-content-center gap-2">
-            <span class="font-bold white-space-nowrap">Informar Novo Procedimento</span>
+            <span class="font-bold white-space-nowrap">Informar Novo ProcedimentoModel</span>
         </div>
     </ng-template>
     <ng-template class="absolute" pTemplate="body">
