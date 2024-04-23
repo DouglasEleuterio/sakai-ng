@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PrimeNGConfig} from 'primeng/api';
+import {WindowService} from "./service/window/window.service";
 
 @Component({
     selector: 'app-root',
@@ -10,7 +11,9 @@ import {PrimeNGConfig} from 'primeng/api';
 })
 export class AppComponent implements OnInit {
 
-    constructor(private primengConfig: PrimeNGConfig) {
+    constructor(
+        private primengConfig: PrimeNGConfig,
+        private eventDataService: WindowService) {
     }
 
     ngOnInit() {
@@ -28,8 +31,8 @@ export class AppComponent implements OnInit {
         if (!this.isJSONValid(event.data)) {
             return;
         }
-
         const eventData = JSON.parse(event.data);
+        this.eventDataService.setEventModel(event.data)
         console.log('Dados recebidos:', eventData);
     }
 
