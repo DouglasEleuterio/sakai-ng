@@ -16,6 +16,8 @@ export class ProcedimentoPainelComponent implements OnInit{
     tiposProcedimentos: TipoProcedimento[] = []
     edit: boolean
     visible: boolean = false
+    modalApagarVisible = false
+    procParaApagar: Procedimento;
 
     constructor(private procedimentoService: ProcedimentoService) {
         this.procedimento = new Procedimento();
@@ -67,5 +69,15 @@ export class ProcedimentoPainelComponent implements OnInit{
         this.procedimento.valor &&
         this.procedimento.satisfacao &&
         this.procedimento.motivacao)
+    }
+
+    exibirModalApagarProcedimento(proc: Procedimento) {
+        this.procParaApagar = proc
+        this.modalApagarVisible = true
+    }
+
+    apagarProcedimento() {
+        this.procedimentoService.apagar(this.procParaApagar)
+        this.modalApagarVisible = false
     }
 }

@@ -61,4 +61,13 @@ export class ProcedimentoService {
         this.procedimentos.push(procedimento)
         return of(this.procedimentos)
     }
+
+    apagar(procedimento: Procedimento) {
+        for (let i = 0; i < this.procedimentos.length; i++) {
+            if(this.procedimentos[i].id == procedimento.id) {
+                this.procedimentos.splice(i,1)
+            }
+        }
+        return of(this.procedimentos)
+    }
 }

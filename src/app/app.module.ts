@@ -1,5 +1,5 @@
-import {DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule} from '@angular/core';
-import {HashLocationStrategy, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import {APP_INITIALIZER, DEFAULT_CURRENCY_CODE, NgModule} from '@angular/core';
+import {LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {AppLayoutModule} from './layout/app.layout.module';
@@ -13,11 +13,25 @@ import {NodeService} from './demo/service/node.service';
 import {PhotoService} from './demo/service/photo.service';
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {EnvService} from "./env/env.service";
+
+const appInitializerFn = (appConfig: EnvService) => {
+    return () => {
+        return appConfig.loadEnv();
+    };
+};
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
     imports: [AppRoutingModule, AppLayoutModule, BrowserModule, BrowserAnimationsModule],
     providers: [
+        EnvService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: appInitializerFn,
+            multi: true,
+            deps: [EnvService]
+        },
         {provide: LocationStrategy, useClass: PathLocationStrategy},
         {provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL'},
         CountryService, CustomerService, EventService, IconService, NodeService,
