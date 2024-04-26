@@ -1,12 +1,13 @@
 export class ContatoModel {
-    nome?: string
-    numero?: string
+    id?: number
+    name?: string
+    phone?: string
     genero?: string
     dataNascimento?: Date
 
     constructor(nome?: string, numero?: string, genero?: string, dataNascimento?: Date) {
-        this.nome = nome;
-        this.numero = numero;
+        this.name = nome;
+        this.phone = numero;
         this.genero = genero;
         this.dataNascimento = dataNascimento;
     }

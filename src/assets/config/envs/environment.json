@@ -1,6 +1,6 @@
 {
-  "baseUrlA": "https://crm-api.3ptecnologia.com.br",
-  "baseUrl": "http://localhost:8003",
+  "baseUrl": "https://crm-api.3ptecnologia.com.br",
+  "baseUrlA": "http://localhost:8003",
   "authLoginUrl": "http://localhost:8087/auth/token",
   "authLogoutUrl": "http://localhost:8087/auth/logout",
   "authCodeUrl": "https://keycloak-teste.fabricacrp.com.br/auth/realms/CRPTecnologia/protocol/openid-connect/auth",
