@@ -1,0 +1,22 @@
+{
+    "event": "appContext",
+    "data": {
+        "contact": {
+            "additional_attributes": {},
+            "availability_status": "offline",
+            "email": null,
+            "id": 989,
+            "name": "62815733140950",
+            "phone_number": "+62815733140950",
+            "identifier": "62815733140950@s.whatsapp.net",
+            "thumbnail": "",
+            "custom_attributes": {},
+            "created_at": 1714072654,
+        },
+        "currentAgent": {
+            "id": 1,
+            "name": "Douglas",
+            "email": "douglas.versato@gmail.com"
+        }
+    }
+}

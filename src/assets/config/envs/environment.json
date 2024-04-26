@@ -1,0 +1,20 @@
+{
+  "baseUrl": "https://crm-api.3ptecnologia.com.br",
+  "authLoginUrl": "http://localhost:8087/auth/token",
+  "authLogoutUrl": "http://localhost:8087/auth/logout",
+  "authCodeUrl": "https://keycloak-teste.fabricacrp.com.br/auth/realms/CRPTecnologia/protocol/openid-connect/auth",
+  "authClientId": "arquitetura",
+  "authCallbackUrl": "http://localhost:4201/oauth/authorize/callback",
+  "authNonce": false,
+  "authChallenge": false,
+  "authScope": "profile offline_access",
+  "authAuthorizationResponseType": "code",
+  "authAuthorizationSecretKey": false,
+  "authParamsType": "query",
+  "authBasicAuthorization": false,
+  "authSendClientIdClientSecret": false,
+  "validationJsonMode": false,
+  "disableRefresh": false,
+  "defaultPaginationSize": 20,
+  "defaultPaginationSizeOptions": [5, 10, 20, 50]
+}

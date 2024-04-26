@@ -14,8 +14,11 @@ export class PacientePainelComponent {
     public contato: ContatoModel = new ContatoModel()
     public numero: string
 
-    constructor(private contatoService: ContatoService, private windowService: WindowService) {
-        this.loadValues()
+    constructor(private contatoService: ContatoService,
+                private windowService: WindowService) {
+        setTimeout(() => {
+            this.loadValues()
+        }, 3000)
     }
 
     private loadValues() {
@@ -23,9 +26,14 @@ export class PacientePainelComponent {
         this.windowService.isRecebeuEvento().subscribe(() => {
             this.windowService.getEventModel().subscribe((value2) => {
                 console.log(`Load Values getEventModel()`)
-                if (value2.data.contact.phone_number) {
-                    console.log(`Recebeu o numero: ${value2.data.contact.phone_number}`)
-                    this.numero = value2.data.contact.phone_number
+                console.log(`Valor de (Value2) metodo loadValues linha 40`)
+                console.log(`Valor de value2.contact ${value2.contact}`)
+                console.log(value2)
+                const jsonObject = JSON.parse(value2);
+                const phoneNumber = jsonObject.data.contact.phone_number;
+                if (phoneNumber) {
+                    console.log(`Recebeu o numero: ${phoneNumber}`)
+                    this.numero = phoneNumber
                     this.contatoService.getContato(this.numero).subscribe((value3) => {
                         console.log('Contato construído')
                         this.contato = value3
