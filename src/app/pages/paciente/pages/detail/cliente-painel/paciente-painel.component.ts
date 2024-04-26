@@ -45,7 +45,7 @@ export class PacientePainelComponent {
 
     getIdade(dataNascimento: Date) {
         if (dataNascimento) {
-            return new Date().getFullYear() - dataNascimento.getFullYear()
+            return new Date().getFullYear() - new Date(dataNascimento).getFullYear()
         }
         return ''
     }
