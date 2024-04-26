@@ -14,7 +14,7 @@ export class PacientePainelComponent {
     public contato: ContatoModel = new ContatoModel()
     public numero: string
 
-    constructor(private contatoService: ContatoService,
+    constructor(protected contatoService: ContatoService,
                 private windowService: WindowService) {
         setTimeout(() => {
             this.loadValues()
@@ -37,6 +37,7 @@ export class PacientePainelComponent {
                     this.contatoService.getContato(this.numero).subscribe((value3) => {
                         console.log('Contato construído')
                         this.contato = value3
+                        this.contatoService.contatoObtido = {...this.contato}
                     })
                 }
             })

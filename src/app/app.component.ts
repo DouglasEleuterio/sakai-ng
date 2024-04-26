@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {PrimeNGConfig} from 'primeng/api';
 import {WindowService} from "./service/window/window.service";
+import {ContatoService} from "./service/contato/contato.service";
+import {ContatoModel} from "./model/contato-model";
 
 @Component({
     selector: 'app-root',
@@ -13,7 +15,8 @@ export class AppComponent implements OnInit {
 
     constructor(
         private primengConfig: PrimeNGConfig,
-        private eventDataService: WindowService) {
+        private eventDataService: WindowService,
+        private contatoService: ContatoService) {
     }
 
     ngOnInit() {
@@ -33,7 +36,10 @@ export class AppComponent implements OnInit {
         }
         const eventData = JSON.parse(event.data);
         this.eventDataService.setEventModel(event.data)
-        console.log('Dados recebidos:', eventData);
+        this.contatoService.getContato(eventData.data.contact.phone_number).subscribe((cont: ContatoModel) => {
+            this.contatoService.contatoObtido = cont
+        })
+        console.log('Dados recebidos:', this.contatoService.contatoObtido);
     }
 
     isJSONValid(data: any): boolean {

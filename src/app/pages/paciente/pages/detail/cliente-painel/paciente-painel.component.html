@@ -9,13 +9,13 @@
                 <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
                     <div>
                         <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Nome:</span>
-                        <div class="mt-1 text-600">{{contato.name}}</div>
+                        <div class="mt-1 text-600">{{contatoService.getContatoObtido().name}}</div>
                     </div>
                 </li>
                 <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
                     <div>
                         <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Telefone:</span>
-                        <div class="mt-1 text-600">{{contato.phone}}</div>
+                        <div class="mt-1 text-600">{{contatoService.getContatoObtido().phone}}</div>
                     </div>
                 </li>
             </ul>
@@ -25,13 +25,13 @@
                 <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
                     <div>
                         <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Genero:</span>
-                        <div class="mt-1 text-600">{{contato.genero == 'M' ? 'Masculino' : 'Feminimo'}}</div>
+                        <div class="mt-1 text-600">{{contatoService.getContatoObtido().genero}}</div>
                     </div>
                 </li>
                 <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
                     <div>
                         <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Idade:</span>
-                        <div class="mt-1 text-600">{{getIdade(contato.dataNascimento)}}</div>
+                        <div class="mt-1 text-600">{{getIdade(contatoService.getContatoObtido().dataNascimento)}}</div>
                     </div>
                 </li>
             </ul>

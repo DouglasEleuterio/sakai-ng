@@ -12,6 +12,7 @@ const API: string = '/cliente'
 export class ContatoService {
 
     protected envService: EnvService;
+    private _contatoObtido: ContatoModel;
 
     constructor(private http: HttpClient, envService: EnvService) {
         this.envService = envService
@@ -24,4 +25,13 @@ export class ContatoService {
     private buildContato(numero: string): ContatoModel {
         return new ContatoModel('Nome do contato', numero, 'M', new Date(1990, 9, 1));
     }
+
+    public getContatoObtido(): ContatoModel {
+        return this._contatoObtido;
+    }
+
+    set contatoObtido(value: ContatoModel) {
+        this._contatoObtido = value;
+    }
+
 }

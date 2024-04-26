@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Procedimento} from "../../../../../model/procedimento-model";
 import {ProcedimentoService} from "../../../../../service/procedimento/procedimento.service";
 import {TipoProcedimento} from "../../../../../model/tipo-procedimento-model";
+import {ContatoService} from "../../../../../service/contato/contato.service";
+import {PacienteProcedimento} from "../../../../../model/paciente-procedimento-model";
 
 
 @Component({
@@ -11,22 +13,24 @@ import {TipoProcedimento} from "../../../../../model/tipo-procedimento-model";
 })
 export class ProcedimentoPainelComponent implements OnInit{
 
-    procedimentos: Procedimento[] = []
-    procedimento: Procedimento
+    procedimentos: PacienteProcedimento[] = []
+    procedimento: PacienteProcedimento
     tiposProcedimentos: TipoProcedimento[] = []
     edit: boolean
     visible: boolean = false
     modalApagarVisible = false
-    procParaApagar: Procedimento;
+    procParaApagar: PacienteProcedimento;
 
-    constructor(private procedimentoService: ProcedimentoService) {
-        this.procedimento = new Procedimento();
+    constructor(private procedimentoService: ProcedimentoService, protected contatoService: ContatoService) {
+        this.procedimento = new PacienteProcedimento();
     }
 
     ngOnInit(): void {
-        this.procedimentoService.getProcedimentos('').subscribe((value) => {
-            this.procedimentos = value
-        })
+        // this.procedimentoService.getProcedimentos('').subscribe((value) => {
+        //     this.procedimentos = value
+        // })
+
+        this.procedimentos = this.contatoService.getContatoObtido().procedimentos
 
         this.procedimentoService.getTiposProcedimentos().subscribe((value) => {
             this.tiposProcedimentos = value
@@ -35,10 +39,10 @@ export class ProcedimentoPainelComponent implements OnInit{
 
     incluir() {
         this.visible = true
-        this.procedimento = new Procedimento()
+        this.procedimento = new PacienteProcedimento()
     }
 
-    editar(proc: Procedimento) {
+    editar(proc: PacienteProcedimento) {
         this.procedimento = {...proc}
         this.visible = true
     }
@@ -54,24 +58,24 @@ export class ProcedimentoPainelComponent implements OnInit{
                 this.procedimentos = value
             })
         }
-        this.procedimento = new Procedimento()
+        this.procedimento = new PacienteProcedimento()
     }
 
     cancelar() {
         this.visible = false
-        this.procedimento = new Procedimento()
+        this.procedimento = new PacienteProcedimento()
     }
 
     validarForm() {
-        return !(this.procedimento.procedimentos &&
-        this.procedimento.procedimentos.length > 0 &&
-        this.procedimento.date &&
+        return !(this.procedimento.procedimento &&
+        this.procedimento.procedimento.length > 0 &&
+        this.procedimento.data &&
         this.procedimento.valor &&
         this.procedimento.satisfacao &&
         this.procedimento.motivacao)
     }
 
-    exibirModalApagarProcedimento(proc: Procedimento) {
+    exibirModalApagarProcedimento(proc: PacienteProcedimento) {
         this.procParaApagar = proc
         this.modalApagarVisible = true
     }
