@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {ContatoModel} from "../../model/contato-model";
 import {HttpClient} from "@angular/common/http";
 import {EnvService} from "../../env/env.service";
 
@@ -12,26 +11,24 @@ const API: string = '/cliente'
 export class ContatoService {
 
     protected envService: EnvService;
-    private _contatoObtido: ContatoModel;
+    private _contatoObtido: Observable<any>;
+    private numeroContato: string = ''
 
     constructor(private http: HttpClient, envService: EnvService) {
         this.envService = envService
     }
 
-    public getContato(numero: string): Observable<any> {
-        return this.http.get(`${this.envService.environment.baseUrl}${API}/${numero}`)
+    public getContato(numero: string): void {
+        this._contatoObtido = this
+            .http
+            .get(`${this.envService.environment.baseUrl}${API}/${numero}`)
     }
 
-    private buildContato(numero: string): ContatoModel {
-        return new ContatoModel('Nome do contato', numero, 'M', new Date(1990, 9, 1));
+    public getContatoObtido(): Observable<any> {
+        return this._contatoObtido
     }
 
-    public getContatoObtido(): ContatoModel {
-        return this._contatoObtido;
+    public recarregarContato(): void {
+        this.getContato(this.numeroContato)
     }
-
-    set contatoObtido(value: ContatoModel) {
-        this._contatoObtido = value;
-    }
-
 }

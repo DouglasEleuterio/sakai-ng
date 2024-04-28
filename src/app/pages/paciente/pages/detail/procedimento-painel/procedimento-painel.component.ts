@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Procedimento} from "../../../../../model/procedimento-model";
 import {ProcedimentoService} from "../../../../../service/procedimento/procedimento.service";
 import {TipoProcedimento} from "../../../../../model/tipo-procedimento-model";
 import {ContatoService} from "../../../../../service/contato/contato.service";
@@ -11,9 +10,9 @@ import {PacienteProcedimento} from "../../../../../model/paciente-procedimento-m
   templateUrl: './procedimento-painel.component.html',
   styleUrl: './procedimento-painel.component.scss'
 })
-export class ProcedimentoPainelComponent implements OnInit{
+export class ProcedimentoPainelComponent implements OnInit {
 
-    procedimentos: PacienteProcedimento[] = []
+    //Procedimento de Cadastro/Edição
     procedimento: PacienteProcedimento
     tiposProcedimentos: TipoProcedimento[] = []
     edit: boolean
@@ -21,17 +20,12 @@ export class ProcedimentoPainelComponent implements OnInit{
     modalApagarVisible = false
     procParaApagar: PacienteProcedimento;
 
-    constructor(private procedimentoService: ProcedimentoService, protected contatoService: ContatoService) {
+    constructor(private procedimentoService: ProcedimentoService,
+                protected contatoService: ContatoService) {
         this.procedimento = new PacienteProcedimento();
     }
 
     ngOnInit(): void {
-        // this.procedimentoService.getProcedimentos('').subscribe((value) => {
-        //     this.procedimentos = value
-        // })
-
-        this.procedimentos = this.contatoService.getContatoObtido().procedimentos
-
         this.procedimentoService.getTiposProcedimentos().subscribe((value) => {
             this.tiposProcedimentos = value
         })
@@ -50,13 +44,10 @@ export class ProcedimentoPainelComponent implements OnInit{
     salvar() {
         this.visible = false
         if(this.procedimento.id) {
-        this.procedimentoService.editarProcedimento(this.procedimento).subscribe((value) => {
-                this.procedimentos = value
-            })
+            this.procedimentoService.editarProcedimento(this.procedimento)
         } else {
-            this.procedimentoService.criar(this.procedimento).subscribe((value) => {
-                this.procedimentos = value
-            })
+            this.procedimentoService.criar(this.procedimento)
+
         }
         this.procedimento = new PacienteProcedimento()
     }
