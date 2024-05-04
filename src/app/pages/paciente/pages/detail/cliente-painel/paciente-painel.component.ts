@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {ContatoModel} from "../../../../../model/contato-model";
 import {ContatoService} from "../../../../../service/contato/contato.service";
 
 @Component({
@@ -10,11 +9,7 @@ import {ContatoService} from "../../../../../service/contato/contato.service";
 export class PacientePainelComponent {
     edit: boolean = false;
 
-    public contatoObtido: ContatoModel;
-
-    constructor(private contatoService: ContatoService) {
-        this.contatoObtido = this.contatoService.contatoObtido
-    }
+    constructor(protected contatoService: ContatoService) {}
 
     getIdade(dataNascimento: Date) {
         if (dataNascimento) {
