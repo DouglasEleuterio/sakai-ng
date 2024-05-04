@@ -10,12 +10,10 @@ import {ContatoService} from "../../../../../service/contato/contato.service";
 export class PacientePainelComponent {
     edit: boolean = false;
 
-    public contato: ContatoModel = new ContatoModel()
+    public contatoObtido: ContatoModel;
 
     constructor(private contatoService: ContatoService) {
-        this.contatoService.getContatoObtido().subscribe(cont => {
-            this.contato = cont
-        })
+        this.contatoObtido = this.contatoService.contatoObtido
     }
 
     getIdade(dataNascimento: Date) {
@@ -23,5 +21,15 @@ export class PacientePainelComponent {
             return new Date().getFullYear() - new Date(dataNascimento).getFullYear()
         }
         return ''
+    }
+
+    getGenero(): string {
+        if(this.contatoService.contatoObtido.genero === 'M') {
+            return 'Masculino'
+        } else if (this.contatoService.contatoObtido.genero === 'F') {
+            return 'Feminino'
+        } else {
+            return 'Não informado'
+        }
     }
 }
