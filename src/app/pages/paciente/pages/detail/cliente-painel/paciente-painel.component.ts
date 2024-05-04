@@ -15,7 +15,7 @@ export class PacientePainelComponent {
         if (dataNascimento) {
             return new Date().getFullYear() - new Date(dataNascimento).getFullYear()
         }
-        return ''
+        return 'Não informado'
     }
 
     getGenero(): string {

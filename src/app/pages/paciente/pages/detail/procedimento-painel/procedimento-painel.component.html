@@ -4,37 +4,38 @@
     </p-button>
 </div>
 <div class="flex flex-column" *ngIf="!edit">
-    <div *ngFor="let proc of contatoService.contatoObtido.procedimentos"
-         class="border-2 max-h-12rem border-dashed surface-border border-round surface-ground justify-content-between flex font-medium">
-        <div class="flex align-items-center justify-content-center border-round m-2">
-            <ul class="list-none p-5 m-5">
-                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-                    <div>
-                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Procedimento:</span>
+    <div *ngIf="contatoService.contatoObtido && contatoService.contatoObtido.procedimentos && contatoService.contatoObtido.procedimentos.length > 0">
+        <div *ngFor="let proc of contatoService.contatoObtido.procedimentos"
+             class="border-2 max-h-12rem border-dashed surface-border border-round surface-ground justify-content-between flex font-medium">
+            <div class="flex align-items-center justify-content-center border-round m-2">
+                <ul class="list-none p-5 m-5">
+                    <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
+                        <div>
+                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Procedimento:</span>
                             <p-tag severity="info" [value]="proc.procedimento.name"></p-tag>
-                    </div>
-                </li>
-                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-                    <div>
-                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Data:</span>
-                        <div class="mt-1 text-600">{{ proc.data | date: 'dd/MM/yyyy' }}</div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="flex align-items-center justify-content-center border-round m-2">
-            <ul class="list-none p-5 m-5">
-                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-                    <div>
-                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Valor:</span>
-                        <div class="mt-1 text-600">{{ proc.valor | currency: 'BRL': true }}</div>
-                    </div>
-                </li>
-                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-                    <div>
-                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Grau Satisfação:</span>
-                        <!--                        <div class="mt-1 text-600" >-->
-                        <div class="mt-1 text-600">
+                        </div>
+                    </li>
+                    <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
+                        <div>
+                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Data:</span>
+                            <div class="mt-1 text-600">{{ proc.data | date: 'dd/MM/yyyy' }}</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="flex align-items-center justify-content-center border-round m-2">
+                <ul class="list-none p-5 m-5">
+                    <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
+                        <div>
+                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Valor:</span>
+                            <div class="mt-1 text-600">{{ proc.valor | currency: 'BRL': true }}</div>
+                        </div>
+                    </li>
+                    <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
+                        <div>
+                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Grau Satisfação:</span>
+                            <!--                        <div class="mt-1 text-600" >-->
+                            <div class="mt-1 text-600">
                             <span *ngFor="let i of [0,1,2,3,4]; let index = index">
                                 @if (index < proc.satisfacao) {
                                     <i class="pi pi-star-fill text-yellow-500 mr-1 text-2xl"></i>
@@ -42,30 +43,30 @@
                                     <i class="pi pi-star-fill text-300 text-2xl"></i>
                                 }
                             </span>
+                            </div>
                         </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="flex align-items-center justify-content-center border-round m-2">
+                <ul class="list-none p-5 m-5 flex-wrap">
+                    <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
+                        <div>
+                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Motivação:</span>
+                            <div class="mt-1 text-600">{{ proc.motivacao }}</div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="flex flex-column gap-3">
+                    <div class="flex align-items-center justify-content-center">
+                        <a (click)="editar(proc)">Alterar</a>
                     </div>
-                </li>
-            </ul>
-        </div>
-        <div class="flex align-items-center justify-content-center border-round m-2">
-            <ul class="list-none p-5 m-5 flex-wrap">
-                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-                    <div>
-                        <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Motivação:</span>
-                        <div class="mt-1 text-600">{{ proc.motivacao }}</div>
+                    <div class="flex align-items-center justify-content-center">
+                        <a (click)="exibirModalApagarProcedimento(proc)">Apagar</a>
                     </div>
-                </li>
-            </ul>
-            <div class="flex flex-column gap-3">
-                <div class="flex align-items-center justify-content-center">
-                    <a (click)="editar(proc)">Alterar</a>
-                </div>
-                <div class="flex align-items-center justify-content-center">
-                    <a (click)="exibirModalApagarProcedimento(proc)">Apagar</a>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <!--<p-dialog-->
