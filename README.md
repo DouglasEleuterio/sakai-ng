@@ -57,7 +57,6 @@ https://realfavicongenerator.net/
 ````
 docker login -u douglaseleuterioferreira -p Fox789789@!
 ````
-
 ````
 docker build -t crm-app:v1.0.1 --build-arg VERSION=1.0.1 .
 ````

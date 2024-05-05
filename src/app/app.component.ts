@@ -37,7 +37,6 @@ export class AppComponent implements OnInit {
         this.eventDataService.setEventModel(event.data)
         this.contatoService
             .getContato(eventData.data.contact.phone_number)
-        this.contatoService.phone = eventData.data.contact.phone_number
     }
 
     isJSONValid(data: any): boolean {

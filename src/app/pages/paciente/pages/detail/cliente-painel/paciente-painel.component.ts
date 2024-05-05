@@ -8,7 +8,7 @@ import {ContatoService} from "../../../../../service/contato/contato.service";
 })
 export class PacientePainelComponent {
     edit: boolean = false;
-    clienteCadastrar: {name: string, phone: string, dataNascimento: Date, genero: string}
+    clienteCadastrar: {id?: number, name: string, phone: string, dataNascimento: Date, genero?: string}
 
     constructor(protected contatoService: ContatoService) {
         this.createClienteCadastrar()
@@ -33,6 +33,7 @@ export class PacientePainelComponent {
 
     cancelar() {
         this.createClienteCadastrar()
+        this.edit = false
     }
 
     private createClienteCadastrar(){
@@ -46,6 +47,18 @@ export class PacientePainelComponent {
     salvar() {
         this.contatoService.createContato(this.clienteCadastrar).subscribe( () => {
             this.contatoService.getContato(this.contatoService.phone)
+            this.edit = false
         })
+    }
+
+    editarContato() {
+        this.edit = true
+        this.clienteCadastrar = {
+            id: this.contatoService.contatoObtido.id,
+            name: this.contatoService.contatoObtido.name,
+            phone: this.contatoService.contatoObtido.phone,
+            dataNascimento: this.contatoService.contatoObtido.dataNascimento,
+            genero: this.contatoService.contatoObtido.genero
+        }
     }
 }

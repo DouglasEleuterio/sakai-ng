@@ -1,6 +1,6 @@
 <div class="flex justify-content-end h-4rem flex-wrap">
     <p-button severity="warning" [raised]="true" label="Alterar" icon="pi pi-user-edit" iconPos="right"
-              (onClick)="edit = !edit"/>
+              (onClick)="editarContato()"/>
 </div>
 <div class="flex flex-column" *ngIf="!edit">
     <div class="border-2 border-dashed surface-border border-round surface-ground justify-content-between flex font-medium">
