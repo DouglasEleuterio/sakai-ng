@@ -84,6 +84,7 @@
                       severity="warning"></p-button>
             <p-button [disabled]="validarForm()" [raised]="true" class="flex w-9rem h-3rem" icon="pi pi-check"
                       (click)="salvar()"
+                      [loading]="loading"
                       label="Salvar" pAutoFocus
                       [autofocus]="false"
                       severity="success"></p-button>
