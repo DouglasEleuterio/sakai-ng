@@ -23,6 +23,7 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {MultiSelectModule} from "primeng/multiselect";
 import {RatingModule} from "primeng/rating";
 import {TagModule} from "primeng/tag";
+import {ToastModule} from "primeng/toast";
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import {TagModule} from "primeng/tag";
         InputTextareaModule,
         MultiSelectModule,
         RatingModule,
-        TagModule
+        TagModule,
+        ToastModule
     ]
 })
 export class PacienteModule { }

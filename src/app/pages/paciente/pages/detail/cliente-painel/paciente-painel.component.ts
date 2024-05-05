@@ -5,7 +5,8 @@ import {MessageService} from "primeng/api";
 @Component({
     selector: 'app-cliente-painel',
     templateUrl: './paciente-painel.component.html',
-    styleUrl: './paciente-painel.component.scss'
+    styleUrl: './paciente-painel.component.scss',
+    providers: [MessageService]
 })
 export class PacientePainelComponent {
     edit: boolean = false;
@@ -52,12 +53,12 @@ export class PacientePainelComponent {
         this.contatoService.createContato(this.clienteCadastrar).subscribe( () => {
             this.contatoService.getContato(this.contatoService.phone)
             this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Contato salvo' });
-            this.edit = false
             this.loading = false
+            this.edit = false
         }, error => {
-            this.edit = false
             this.loading = false
-            this.messageService.add({ severity: 'danger', summary: 'Erro', detail: error.message });
+            this.edit = false
+            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível realizar a alteração' });
         })
     }
 

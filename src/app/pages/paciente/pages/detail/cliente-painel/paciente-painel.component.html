@@ -1,3 +1,4 @@
+<p-toast/>
 <div class="flex justify-content-end h-4rem flex-wrap">
     <p-button severity="warning" [raised]="true" label="Alterar" icon="pi pi-user-edit" iconPos="right"
               (onClick)="editarContato()"/>
@@ -67,7 +68,7 @@
                 <label class="font-medium text-900">Valor</label>
                 <div class="flex">
                     <p-dropdown appendTo="body"
-                        [options]="[{name: 'Masculino', value: 'M'}, {name: 'Feminino', value: 'Feminino'}]"
+                        [options]="[{name: 'Masculino', value: 'M'}, {name: 'Feminino', value: 'F'}]"
                         [(ngModel)]="clienteCadastrar.genero"
                         optionLabel="name"
                         optionValue="value"
