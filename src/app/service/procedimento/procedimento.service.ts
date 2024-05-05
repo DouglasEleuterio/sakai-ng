@@ -4,8 +4,9 @@ import {HttpClient} from "@angular/common/http";
 import {EnvService} from "../../env/env.service";
 import {PacienteProcedimento} from "../../model/paciente-procedimento-model";
 import {ContatoService} from "../contato/contato.service";
+import {ProcedimentoRequestModel} from "../../model/procedimento-request-model";
 
-const API: string = '/cliente'
+const API: string = '/procedimento'
 
 @Injectable({
     providedIn: 'root'
@@ -13,17 +14,19 @@ const API: string = '/cliente'
 export class ProcedimentoService {
 
     protected envService: EnvService;
-    private procedimentos: PacienteProcedimento[]
+    public procedimentos: PacienteProcedimento[]
 
     constructor(private http: HttpClient,
                 envService: EnvService,
                 private contatoService: ContatoService) {
         this.envService = envService
+        this.getTiposProcedimentos()
     }
 
-    public getTiposProcedimentos(): Observable<any> {
-        //todo Consultar procedimentos ativos
-        return null
+    public getTiposProcedimentos(): void{
+        this.http.get(`${this.envService.environment.baseUrl}${API}`).subscribe((procedimentos: PacienteProcedimento[]) => {
+            this.procedimentos = procedimentos
+        })
     }
 
     public editarProcedimento(procedimento: PacienteProcedimento): void {
@@ -35,10 +38,8 @@ export class ProcedimentoService {
         }
     }
 
-    criar(procedimento: PacienteProcedimento): void {
-        procedimento.id = this.procedimentos.length + 1
-        //todo salvar procedimento API
-        // this.procedimentos.push(procedimento)
+    criar(procedimento: ProcedimentoRequestModel): Observable<any> {
+        return this.http.post(`${this.envService.environment.baseUrl}${API}`, procedimento)
     }
 
     apagar(procedimento: PacienteProcedimento) {
