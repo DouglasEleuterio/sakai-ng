@@ -38,4 +38,55 @@
         </div>
     </div>
 </div>
-
+<p-dialog
+    appendTo="body"
+    header="Header"
+    closable="true"
+    [modal]="true"
+    [blockScroll]="true"
+    [(visible)]="edit"
+    [style]="{ width: '80vw', height: '25vw'}"
+    [maximizable]="true">
+    <ng-template pTemplate="header">
+        <div class="inline-flex align-items-center justify-content-center gap-2">
+            <span class="font-bold white-space-nowrap">Informar Dados do Cliente</span>
+        </div>
+    </ng-template>
+    <ng-template class="absolute" pTemplate="body">
+        <div class="grid formgrid p-fluid">
+            <div class="field mb-6 col-12 md:col-6">
+                <label for="name" class="font-medium text-900">Nome</label>
+                <input required id="name" type="text" [(ngModel)]="clienteCadastrar.name" pInputText>
+            </div>
+            <div class="field mb-6 col-12 md:col-5">
+                <label for="due_date" class="font-medium text-900">Data</label>
+                <p-calendar required appendTo="body" id="due_date" [(ngModel)]="clienteCadastrar.dataNascimento" dateFormat="dd/mm/yy"
+                            [showIcon]="true"></p-calendar>
+            </div>
+            <div class="field mb-6 col-6 md:col-5">
+                <label class="font-medium text-900">Valor</label>
+                <div class="flex">
+                    <p-dropdown appendTo="body"
+                        [options]="[{name: 'Masculino', value: 'M'}, {name: 'Feminino', value: 'Feminino'}]"
+                        [(ngModel)]="clienteCadastrar.genero"
+                        optionLabel="name"
+                        optionValue="value"
+                        placeholder="Selecione um Genero" />
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="flex justify-content-between flex-wrap">
+            <p-button [raised]="true" class="flex w-9rem h-3rem" icon="pi pi-check" (click)="cancelar()"
+                      label="Cancelar"
+                      pAutoFocus [autofocus]="false"
+                      severity="warning"></p-button>
+            <p-button [disabled]="validarForm()" [raised]="true" class="flex w-9rem h-3rem" icon="pi pi-check"
+                      (click)="salvar()"
+                      label="Salvar" pAutoFocus
+                      [autofocus]="false"
+                      severity="success"></p-button>
+        </div>
+    </ng-template>
+</p-dialog>

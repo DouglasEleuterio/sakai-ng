@@ -83,3 +83,16 @@ https://github.com/traefik/traefik/issues/2418
 
 #### Tela de detalhes do paciente
 /crm/paciente/detail/{id}
+
+
+# Design de implementação.
+### Os dados são obtidos através de uma única consulta.
+Ao solicitar os dados do cliente, serão obtidos os dados pessoais e histórico de procedimentos, quando disponíveis.
+
+Portanto, o ideal é centralizar os dados do cliente em apenas um ponto, pois ele poderá ser acessado por todas as páginas.
+
+* Criar a service que obterá os dados - Contato Service
+* Criar atributo do tipo da entidade na service que será usado globalmente - contatoObtido
+* Realizar a consulta na API, obter os dados e inserir em contatoObtido
+* Acessar o objeto representante da entidade nas classes de Visualização
+

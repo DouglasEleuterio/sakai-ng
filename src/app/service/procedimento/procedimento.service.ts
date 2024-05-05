@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from "rxjs";
-import {TipoProcedimento} from "../../model/tipo-procedimento-model";
+import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {EnvService} from "../../env/env.service";
 import {PacienteProcedimento} from "../../model/paciente-procedimento-model";
@@ -34,15 +33,12 @@ export class ProcedimentoService {
                 //todo enviar alteração contato api
             }
         }
-        this.contatoService.recarregarContato()
     }
 
     criar(procedimento: PacienteProcedimento): void {
         procedimento.id = this.procedimentos.length + 1
         //todo salvar procedimento API
         // this.procedimentos.push(procedimento)
-        this.contatoService.recarregarContato()
-
     }
 
     apagar(procedimento: PacienteProcedimento) {
@@ -52,6 +48,5 @@ export class ProcedimentoService {
                 this.procedimentos.splice(i,1)
             }
         }
-        this.contatoService.recarregarContato()
     }
 }

@@ -12,6 +12,7 @@ export class ContatoService {
 
     protected envService: EnvService;
     public contatoObtido: ContatoModel
+    public phone: string = '9999999999999'
 
     constructor(private http: HttpClient, envService: EnvService) {
         this.envService = envService
@@ -38,4 +39,9 @@ export class ContatoService {
     }
 */
 
+    createContato(clienteCadastrar: { name: string; phone: string, dataNascimento: Date; genero: string }) {
+        return this.http
+            .post(`${this.envService.environment.baseUrl}${API}`, clienteCadastrar)
+
+    }
 }

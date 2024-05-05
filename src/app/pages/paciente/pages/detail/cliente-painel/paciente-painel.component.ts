@@ -8,8 +8,11 @@ import {ContatoService} from "../../../../../service/contato/contato.service";
 })
 export class PacientePainelComponent {
     edit: boolean = false;
+    clienteCadastrar: {name: string, phone: string, dataNascimento: Date, genero: string}
 
-    constructor(protected contatoService: ContatoService) {}
+    constructor(protected contatoService: ContatoService) {
+        this.createClienteCadastrar()
+    }
 
     getIdade(dataNascimento: Date) {
         if (dataNascimento) {
@@ -26,5 +29,23 @@ export class PacientePainelComponent {
         } else {
             return 'Não informado'
         }
+    }
+
+    cancelar() {
+        this.createClienteCadastrar()
+    }
+
+    private createClienteCadastrar(){
+        this.clienteCadastrar = {name: '', phone: this.contatoService.phone, dataNascimento: new Date(), genero: ''}
+    }
+
+    validarForm() {
+        return !this.clienteCadastrar.name || !this.clienteCadastrar.genero || !this.clienteCadastrar.dataNascimento;
+    }
+
+    salvar() {
+        this.contatoService.createContato(this.clienteCadastrar).subscribe( () => {
+            this.contatoService.getContato(this.contatoService.phone)
+        })
     }
 }
